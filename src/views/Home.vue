@@ -8,10 +8,12 @@
         <el-row :gutter="10">
           <draggable
             :list="val"
-            :group="{ name: 'item', pull: 'clone', put: true }"
-            @change="log"
-            :sort="false"
             :clone="cloneDog"
+            v-bind="{
+              group: { name: 'itemLeft', pull: 'clone', put: false },
+              sort: false,
+              onChange: log
+            }"
           >
             <el-col :span="12" v-for="(item, index) in val" :key="index">
               <div class="item  d2-mb-10">
@@ -29,26 +31,36 @@
       </div>
       <el-form ref="form" :model="form" label-width="100px" label-suffix=":">
         <draggable
-          v-model="itemArr"
-          @change="dragChange"
-          @start="dragStart"
-          @end="dragEnd"
-          @move="dragMove"
+          :list="itemArr"
           class="main d2-p-10"
+          :clone="cloneDog"
           v-bind="{
-            ghostClass: 'ghostClass',
-            dragClass: 'dragClass',
-            group: 'item',
-            animation: 200
+            group: { name: 'itemCenter', put: ['itemLeft'] },
+            animation: 200,
+            easing: 'cubic-bezier(1, 0, 0, 1)',
+            ghostClass: 'sortable-ghost', //拖动元素的class的占位符的类名
+            chosenClass: 'sortable-chosen', // 选中元素的class
+            dragClass: 'sortable-drag', //拖动元素的class
+            onMove: dragMove,
+            onEnd: dragEnd,
+            onStart: dragStart,
+            onChange: dragChange
           }"
         >
-          <el-form-item
-            :label="item.title"
+          <div
+            class="item-wrapper"
             v-for="(item, index) in itemArr"
             :key="index"
           >
-            <el-input v-model="form.name"></el-input>
-          </el-form-item>
+            <el-form-item :label="item.title" class="form-item">
+              <el-input
+                v-model="form.name"
+                type="textarea"
+                :rows="4"
+              ></el-input>
+            </el-form-item>
+            <div class="empty-item"></div>
+          </div>
         </draggable>
       </el-form>
     </div>
@@ -151,20 +163,41 @@ $width: 300px;
     }
     .main {
       height: calc(100vh - 47px);
-      .dragClass {
-        // background: red;
+      .item-wrapper {
+        position: relative;
+        .empty-item {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0;
+        }
       }
-      .ghostClass {
-        height: 4px;
-        background: red;
-        width: 100%;
+      // 选中元素的class
+      .sortable-chosen {
         .item {
           display: none;
         }
       }
+      // 拖动元素的class的占位符的类名
+      .sortable-ghost {
+        margin-bottom: 18px;
+        width: 100%;
+        &.item-wrapper {
+          background: red;
+          height: 4px;
+          width: 100%;
+          .form-item {
+            display: none;
+          }
+        }
+      }
+      // 拖动元素的class
+      .sortable-drag {
+      }
     }
   }
-
   .right {
     width: $width;
     height: 100vh;
