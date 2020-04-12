@@ -51,7 +51,7 @@
             class="item-wrapper"
             :class="[item.isActive ? 'item-active' : '']"
             v-for="(item, index) in itemArr"
-            :key="index"
+            :key="item.id"
             @click="setCenterActive(index)"
           >
             <el-form-item :label="item.title" class="form-item">
@@ -61,7 +61,7 @@
             <template v-if="item.isActive">
               <i class="icon iconfont icon-tuozhuai"></i>
               <i class="icon iconfont icon-lajitong"></i>
-              <i class="icon iconfont icon-fuzhi1"></i>
+              <i class="icon iconfont icon-fuzhi1" @click="doCopy(index)"></i>
             </template>
           </div>
         </draggable>
@@ -78,7 +78,7 @@ import draggable from "vuedraggable";
 
 import leftConfig from "./config/left";
 
-import { uniqueId } from "lodash";
+import { now } from "lodash";
 
 export default {
   name: "",
@@ -119,13 +119,13 @@ export default {
     cloneDog({ title }) {
       console.log(1111);
       return {
-        id: uniqueId(),
+        id: now(),
         title,
         isActive: false
       };
     },
     leftClick(index, key) {
-      this.itemArr.push({ ...this.leftConfig[key][index] });
+      this.itemArr.push({ ...this.leftConfig[key][index], id: now() });
       this.setCenterActive(this.itemArr.length - 1);
     },
     leftDragStart() {
@@ -156,6 +156,16 @@ export default {
       this.itemArr.map((item, idx) => {
         this.$set(this.itemArr[idx], "isActive", idx === index);
       });
+    },
+    /**
+     * 复制，快捷添加
+     */
+    async doCopy(index) {
+      this.itemArr.splice(index, 0, { ...this.itemArr[index], id: now() });
+      await this.$nextTick();
+      // const tempIndex = index + 1;
+      this.setCenterActive(index + 1);
+      console.log(JSON.stringify(this.itemArr, null, 2));
     }
   }
 };
