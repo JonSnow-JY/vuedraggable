@@ -176,19 +176,24 @@ $width: 300px;
       }
       // 选中元素的class
       .sortable-chosen {
-        .item {
-          display: none;
-        }
       }
       // 拖动元素的class的占位符的类名
       .sortable-ghost {
         margin-bottom: 18px;
         width: 100%;
-        &.item-wrapper {
+        &.item-wrapper,
+        &.el-col {
           background: red;
           height: 4px;
           width: 100%;
+        }
+        &.item-wrapper {
           .form-item {
+            display: none;
+          }
+        }
+        &.el-col {
+          .item {
             display: none;
           }
         }
