@@ -32,11 +32,12 @@
       <el-form ref="form" :model="form" label-width="82px" label-suffix=":">
         <draggable
           :list="itemArr"
-          class="main"
+          class="main list-group"
           :clone="cloneDog"
+          tag="div"
           v-bind="{
             group: { name: 'itemCenter', put: ['itemLeft'] },
-            animation: 200,
+            animation: 300,
             easing: 'cubic-bezier(1, 0, 0, 1)',
             ghostClass: 'sortable-ghost', //拖动元素的class的占位符的类名
             chosenClass: 'sortable-chosen', // 选中元素的class
@@ -53,11 +54,7 @@
             :key="index"
           >
             <el-form-item :label="item.title" class="form-item">
-              <el-input
-                v-model="form.name"
-                type="textarea"
-                :rows="6"
-              ></el-input>
+              <el-input v-model="form.name" :rows="6"></el-input>
             </el-form-item>
             <div class="empty-item"></div>
           </div>
@@ -168,6 +165,7 @@ $width: 300px;
       padding-top: 18px;
       padding-left: 18px;
       padding-right: 18px;
+
       .item-wrapper {
         position: relative;
         .empty-item {
@@ -189,7 +187,7 @@ $width: 300px;
         &.item-wrapper,
         &.el-col {
           background: red;
-          height: 4px;
+          height: 2px;
           width: 100%;
         }
         &.item-wrapper {
