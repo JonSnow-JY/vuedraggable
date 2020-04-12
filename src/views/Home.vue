@@ -33,8 +33,16 @@
     </div>
     <div class="center" flex-box="1">
       <div class="top" flex="dir:right">
-        <el-button type="text" class="d2-mr-10">清空</el-button>
-        <el-button type="text" class="d2-mr-10">预览</el-button>
+        <el-button
+          type="text"
+          class="d2-mr-10"
+          @click="doClear"
+          :disabled="!itemArr.length"
+          ><i class="icon iconfont icon-lajitong clear"></i>清空</el-button
+        >
+        <el-button type="text" class="d2-mr-10">
+          <i class="icon iconfont icon-yulan preview"></i>预览</el-button
+        >
       </div>
       <el-form ref="form" :model="form" label-width="82px" label-suffix=":">
         <draggable
@@ -178,6 +186,12 @@ export default {
       this.itemArr.splice(index, 1);
       const tempIndex = index === this.itemArr.length ? index - 1 : index;
       this.setCenterActive(tempIndex);
+    },
+    /**
+     * 清空
+     */
+    doClear() {
+      this.itemArr = [];
     }
   }
 };
@@ -218,6 +232,16 @@ $width: 300px;
     .top {
       height: 46px;
       border-bottom: $border;
+      .clear {
+        position: relative;
+        top: 1px;
+        margin-right: 2px;
+      }
+      .preview {
+        position: relative;
+        top: 1px;
+        margin-right: 4px;
+      }
     }
     .main {
       height: calc(100vh - 66px);
