@@ -9,6 +9,8 @@
           <draggable
             :list="val"
             :clone="cloneDog"
+            @start="leftDragStart"
+            @end="leftDragEnd"
             v-bind="{
               group: { name: 'itemLeft', pull: 'clone', put: false },
               sort: false,
@@ -34,31 +36,28 @@
           :list="itemArr"
           class="main list-group"
           :clone="cloneDog"
-          tag="div"
-          v-bind="{
-            group: { name: 'itemCenter', put: ['itemLeft'] },
-            animation: 300,
-            easing: 'cubic-bezier(1, 0, 0, 1)',
-            ghostClass: 'sortable-ghost', //拖动元素的class的占位符的类名
-            chosenClass: 'sortable-chosen', // 选中元素的class
-            dragClass: 'sortable-drag', //拖动元素的class
-            onMove: dragMove,
-            onEnd: dragEnd,
-            onStart: dragStart,
-            onChange: dragChange
-          }"
+          @start="centerDragStart"
+          @end="centerDragEnd"
+          @change="dragChange"
+          :move="dragMove"
+          v-bind="sortableOptions"
         >
           <div
             class="item-wrapper"
             :class="[item.isActive ? 'item-active' : '']"
             v-for="(item, index) in itemArr"
             :key="index"
-            @click="setActive(index)"
+            @click="setCenterActive(index)"
           >
             <el-form-item :label="item.title" class="form-item">
               <el-input v-model="form.name" :rows="6"></el-input>
             </el-form-item>
             <div class="empty-item"></div>
+            <template v-if="item.isActive">
+              <i class="icon iconfont icon-tuozhuai"></i>
+              <i class="icon iconfont icon-lajitong"></i>
+              <i class="icon iconfont icon-fuzhi1"></i>
+            </template>
           </div>
         </draggable>
       </el-form>
@@ -90,7 +89,17 @@ export default {
         name: ""
       },
       itemArr: [],
-      drag: false
+      drag: false,
+      sortableOptions: {
+        group: { name: "itemCenter", put: ["itemLeft"] },
+        animation: 300,
+        disabled: false,
+        handle: ".icon-tuozhuai",
+        easing: "cubic-bezier(1, 0, 0, 1)",
+        ghostClass: "sortable-ghost", //拖动元素的class的占位符的类名
+        chosenClass: "sortable-chosen", // 选中元素的class
+        dragClass: "sortable-drag" //拖动元素的class
+      }
     };
   },
   computed: {},
@@ -110,14 +119,17 @@ export default {
         isActive: false
       };
     },
-    dragStart() {
-      console.log("dragStart");
-      this.drag = true;
+    leftDragStart() {},
+    leftDragEnd(evt) {
+      const { newIndex } = evt;
+      this.setCenterActive(newIndex);
     },
-    dragEnd() {
-      console.log("dragEnd");
+    centerDragStart() {
+      console.log("centerDragStart");
+    },
+    centerDragEnd() {
+      console.log("centerDragEnd");
       console.log(this.itemArr);
-      this.drag = false;
     },
     dragMove() {
       console.log("dragMove");
@@ -126,9 +138,9 @@ export default {
       console.log("dragChange");
     },
     /**
-     * 点击选中
+     * 点击选中，设置中间区域能够滚动
      */
-    setActive(index) {
+    setCenterActive(index) {
       this.itemArr.map((item, idx) => {
         this.$set(this.itemArr[idx], "isActive", idx === index);
       });
@@ -191,6 +203,32 @@ $width: 300px;
           bottom: 0;
           opacity: 0;
         }
+        .icon-lajitong,
+        .icon-fuzhi1,
+        .icon-tuozhuai {
+          position: absolute;
+
+          background: #409eff;
+          color: #fff;
+          padding: 4px;
+          z-index: 1;
+        }
+        .icon-tuozhuai {
+          top: 0;
+          left: 0;
+          cursor: move;
+        }
+        .icon-lajitong,
+        .icon-fuzhi1 {
+          bottom: 0;
+          cursor: pointer;
+        }
+        .icon-lajitong {
+          right: 0;
+        }
+        .icon-fuzhi1 {
+          right: 24px;
+        }
         &:hover {
           background: #ecf5ff;
         }
@@ -209,12 +247,15 @@ $width: 300px;
         &.el-col {
           background: red;
           border: none;
-          height: 2px;
+          height: 4px;
           width: 100%;
           margin-top: 9px;
         }
         &.item-wrapper {
-          .form-item {
+          .form-item,
+          .icon-fuzhi1,
+          .icon-lajitong,
+          .icon-tuozhuai {
             display: none;
           }
         }
