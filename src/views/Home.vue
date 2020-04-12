@@ -44,10 +44,22 @@
           <i class="icon iconfont icon-yulan preview"></i>预览</el-button
         >
       </div>
-      <el-form ref="form" :model="form" label-width="82px" label-suffix=":">
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="82px"
+        label-suffix=":"
+        class="form-wrapper"
+      >
+        <span
+          class="empty-text"
+          flex="main:center cross:center"
+          v-if="!itemArr.length"
+          >从左侧拖拽或点击来添加字段</span
+        >
         <draggable
           :list="itemArr"
-          class="main list-group"
+          class="main"
           :clone="cloneDog"
           @start="centerDragStart"
           @end="centerDragEnd"
@@ -243,91 +255,105 @@ $width: 300px;
         margin-right: 4px;
       }
     }
-    .main {
-      height: calc(100vh - 66px);
-      overflow: auto;
-      overflow-x: hidden;
-      margin: 10px;
-      padding: 2px;
-      border: 1px dashed #999;
-      .item-wrapper {
+    .form-wrapper {
+      position: relative;
+      .empty-text {
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        font-size: 20px;
+        color: #ccc;
+      }
+      .main {
+        height: calc(100vh - 66px);
+        overflow: auto;
+        overflow-x: hidden;
+        margin: 10px;
+        padding: 2px;
+        border: 1px dashed #999;
         position: relative;
-        border: 1px dashed #ccc;
-        margin-bottom: 2px;
-        border: 1px dashed hsla(0, 0%, 66.7%, 0.5);
-        background: rgba(236, 245, 255, 0.3);
-        .empty-item {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          opacity: 0;
-        }
-        .icon-lajitong,
-        .icon-fuzhi1,
-        .icon-tuozhuai {
-          position: absolute;
 
-          background: #409eff;
-          color: #fff;
-          padding: 4px;
-          z-index: 1;
-        }
-        .icon-tuozhuai {
-          top: 0;
-          left: 0;
-          cursor: move;
-        }
-        .icon-lajitong,
-        .icon-fuzhi1 {
-          bottom: 0;
-          cursor: pointer;
-        }
-        .icon-lajitong {
-          right: 0;
-        }
-        .icon-fuzhi1 {
-          right: 24px;
-        }
-        &:hover {
-          background: #ecf5ff;
-        }
-        &.item-active {
-          border: 2px solid #409eff;
-        }
-      }
-      // 选中元素的class
-      .sortable-chosen {
-      }
-      // 拖动元素的class的占位符的类名
-      .sortable-ghost {
-        margin-bottom: 9px;
-        width: 100%;
-        &.item-wrapper,
-        &.el-col {
-          background: red;
-          border: none;
-          height: 4px;
-          width: 100%;
-          margin-top: 9px;
-        }
-        &.item-wrapper {
-          .form-item,
-          .icon-fuzhi1,
+        .item-wrapper {
+          position: relative;
+          border: 1px dashed #ccc;
+          margin-bottom: 2px;
+          border: 1px dashed hsla(0, 0%, 66.7%, 0.5);
+          background: rgba(236, 245, 255, 0.3);
+          .empty-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+          }
           .icon-lajitong,
+          .icon-fuzhi1,
           .icon-tuozhuai {
-            display: none;
+            position: absolute;
+
+            background: #409eff;
+            color: #fff;
+            padding: 4px;
+            z-index: 1;
+          }
+          .icon-tuozhuai {
+            top: 0;
+            left: 0;
+            cursor: move;
+          }
+          .icon-lajitong,
+          .icon-fuzhi1 {
+            bottom: 0;
+            cursor: pointer;
+          }
+          .icon-lajitong {
+            right: 0;
+          }
+          .icon-fuzhi1 {
+            right: 24px;
+          }
+          &:hover {
+            background: #ecf5ff;
+          }
+          &.item-active {
+            border: 2px solid #409eff;
           }
         }
-        &.el-col {
-          .item {
-            display: none;
+        // 选中元素的class
+        .sortable-chosen {
+        }
+        // 拖动元素的class的占位符的类名
+        .sortable-ghost {
+          margin-bottom: 9px;
+          width: 100%;
+          &.item-wrapper,
+          &.el-col {
+            background: red;
+            border: none;
+            height: 4px;
+            width: 100%;
+            margin-top: 9px;
+          }
+          &.item-wrapper {
+            .form-item,
+            .icon-fuzhi1,
+            .icon-lajitong,
+            .icon-tuozhuai {
+              display: none;
+            }
+          }
+          &.el-col {
+            .item {
+              display: none;
+            }
           }
         }
-      }
-      // 拖动元素的class
-      .sortable-drag {
+        // 拖动元素的class
+        .sortable-drag {
+        }
       }
     }
   }
