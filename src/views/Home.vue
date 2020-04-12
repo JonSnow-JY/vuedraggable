@@ -50,8 +50,10 @@
         >
           <div
             class="item-wrapper"
+            :class="[item.isActive ? 'item-active' : '']"
             v-for="(item, index) in itemArr"
             :key="index"
+            @click="setActive(index)"
           >
             <el-form-item :label="item.title" class="form-item">
               <el-input v-model="form.name" :rows="6"></el-input>
@@ -101,9 +103,11 @@ export default {
       console.log(999);
     },
     cloneDog({ title }) {
+      console.log(1111);
       return {
         id: uniqueId(),
-        title
+        title,
+        isActive: false
       };
     },
     dragStart() {
@@ -120,6 +124,14 @@ export default {
     },
     dragChange() {
       console.log("dragChange");
+    },
+    /**
+     * 点击选中
+     */
+    setActive(index) {
+      this.itemArr.map((item, idx) => {
+        this.$set(this.itemArr[idx], "isActive", idx === index);
+      });
     }
   }
 };
@@ -159,15 +171,18 @@ $width: 300px;
       border-bottom: $border;
     }
     .main {
-      height: calc(100vh - 47px);
+      height: calc(100vh - 66px);
       overflow: auto;
       overflow-x: hidden;
-      padding-top: 18px;
-      padding-left: 18px;
-      padding-right: 18px;
-
+      margin: 10px;
+      padding: 2px;
+      border: 1px dashed #999;
       .item-wrapper {
         position: relative;
+        border: 1px dashed #ccc;
+        margin-bottom: 2px;
+        border: 1px dashed hsla(0, 0%, 66.7%, 0.5);
+        background: rgba(236, 245, 255, 0.3);
         .empty-item {
           position: absolute;
           top: 0;
@@ -176,19 +191,27 @@ $width: 300px;
           bottom: 0;
           opacity: 0;
         }
+        &:hover {
+          background: #ecf5ff;
+        }
+        &.item-active {
+          border: 2px solid #409eff;
+        }
       }
       // 选中元素的class
       .sortable-chosen {
       }
       // 拖动元素的class的占位符的类名
       .sortable-ghost {
-        margin-bottom: 18px;
+        margin-bottom: 9px;
         width: 100%;
         &.item-wrapper,
         &.el-col {
           background: red;
+          border: none;
           height: 2px;
           width: 100%;
+          margin-top: 9px;
         }
         &.item-wrapper {
           .form-item {
