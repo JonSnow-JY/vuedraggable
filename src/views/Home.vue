@@ -60,8 +60,14 @@
             <div class="empty-item"></div>
             <template v-if="item.isActive">
               <i class="icon iconfont icon-tuozhuai"></i>
-              <i class="icon iconfont icon-lajitong"></i>
-              <i class="icon iconfont icon-fuzhi1" @click="doCopy(index)"></i>
+              <i
+                class="icon iconfont icon-lajitong"
+                @click.stop="doDel(index)"
+              ></i>
+              <i
+                class="icon iconfont icon-fuzhi1"
+                @click.stop="doCopy(index)"
+              ></i>
             </template>
           </div>
         </draggable>
@@ -153,6 +159,7 @@ export default {
      * 点击选中，设置中间区域能够滚动
      */
     setCenterActive(index) {
+      if (!this.itemArr.length) return;
       this.itemArr.map((item, idx) => {
         this.$set(this.itemArr[idx], "isActive", idx === index);
       });
@@ -160,12 +167,17 @@ export default {
     /**
      * 复制，快捷添加
      */
-    async doCopy(index) {
+    doCopy(index) {
       this.itemArr.splice(index, 0, { ...this.itemArr[index], id: now() });
-      await this.$nextTick();
-      // const tempIndex = index + 1;
       this.setCenterActive(index + 1);
-      console.log(JSON.stringify(this.itemArr, null, 2));
+    },
+    /**
+     * 删除
+     */
+    async doDel(index) {
+      this.itemArr.splice(index, 1);
+      const tempIndex = index === this.itemArr.length ? index - 1 : index;
+      this.setCenterActive(tempIndex);
     }
   }
 };
