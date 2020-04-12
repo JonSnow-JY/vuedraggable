@@ -29,10 +29,10 @@
         <el-button type="text" class="d2-mr-10">清空</el-button>
         <el-button type="text" class="d2-mr-10">预览</el-button>
       </div>
-      <el-form ref="form" :model="form" label-width="100px" label-suffix=":">
+      <el-form ref="form" :model="form" label-width="82px" label-suffix=":">
         <draggable
           :list="itemArr"
-          class="main d2-p-10"
+          class="main"
           :clone="cloneDog"
           v-bind="{
             group: { name: 'itemCenter', put: ['itemLeft'] },
@@ -56,7 +56,7 @@
               <el-input
                 v-model="form.name"
                 type="textarea"
-                :rows="4"
+                :rows="6"
               ></el-input>
             </el-form-item>
             <div class="empty-item"></div>
@@ -163,6 +163,11 @@ $width: 300px;
     }
     .main {
       height: calc(100vh - 47px);
+      overflow: auto;
+      overflow-x: hidden;
+      padding-top: 18px;
+      padding-left: 18px;
+      padding-right: 18px;
       .item-wrapper {
         position: relative;
         .empty-item {
