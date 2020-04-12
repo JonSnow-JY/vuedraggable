@@ -17,7 +17,12 @@
               onChange: log
             }"
           >
-            <el-col :span="12" v-for="(item, index) in val" :key="index">
+            <el-col
+              :span="12"
+              v-for="(item, index) in val"
+              :key="index"
+              @click.native="leftClick(index, key)"
+            >
               <div class="item  d2-mb-10">
                 {{ item.title }}
               </div>
@@ -119,8 +124,15 @@ export default {
         isActive: false
       };
     },
-    leftDragStart() {},
+    leftClick(index, key) {
+      this.itemArr.push({ ...this.leftConfig[key][index] });
+      this.setCenterActive(this.itemArr.length - 1);
+    },
+    leftDragStart() {
+      console.log("leftDragStart");
+    },
     leftDragEnd(evt) {
+      console.log("leftDragEnd");
       const { newIndex } = evt;
       this.setCenterActive(newIndex);
     },
@@ -157,6 +169,8 @@ $width: 300px;
   .left {
     width: $width;
     height: 100vh;
+    user-select: none;
+
     .title {
       font-size: 14px;
     }
@@ -178,6 +192,7 @@ $width: 300px;
     border-left: $border;
     border-right: $border;
     font-size: 13px;
+    user-select: none;
     .top {
       height: 46px;
       border-bottom: $border;
