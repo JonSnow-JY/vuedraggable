@@ -19,18 +19,18 @@ export default {
       defaultValue: "",
       // 自定义Class
       customClass: "",
-      // 数据绑定选项的初始状态
-      dataBingingDisabled: true,
       // 操作属性
       actionAttribute: ["0"],
+      // 操作属性中disabled项
+      actionAttributeDisabledOptions: ["0"],
       // 显示的操作属性选项
-      actionAttributeOptions: [0, 1, 2, 3],
+      actionAttributeOptions: ["0", "1", "3", "4"],
       // 必填
       required: false,
       // 只验证必填
       simpleRequired: false,
       // 必填类型
-      requiredType: "",
+      requiredType: "1",
       // 必填的正则
       requiredPattern: ""
     },
@@ -44,9 +44,9 @@ export default {
       placeholder: "",
       defaultValue: "",
       customClass: "",
-      dataBingingDisabled: true,
-      actionAttribute: [0],
-      actionAttributeOptions: [0, 1, 2],
+      actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
+      actionAttributeOptions: ["0", "1", "3"],
       required: false,
       simpleRequired: false,
       requiredType: "",
@@ -68,8 +68,9 @@ export default {
       // num默认值
       numberDefaultValue: 0,
       customClass: "",
-      actionAttribute: [0],
-      actionAttributeOptions: [0, 1, 2],
+      actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
+      actionAttributeOptions: ["0", "1", "3"],
       required: false,
       simpleRequired: true
     },
@@ -89,8 +90,9 @@ export default {
       // 选项
       radioOptions: [],
       customClass: "",
-      actionAttribute: [0],
-      actionAttributeOptions: [0, 1, 2],
+      actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
+      actionAttributeOptions: ["0", "1", "3"],
       required: false,
       simpleRequired: true
     },
@@ -106,8 +108,9 @@ export default {
       dataType: "0",
       radioOptions: [],
       customClass: "",
-      actionAttribute: [0],
-      actionAttributeOptions: [0, 1, 2],
+      actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
+      actionAttributeOptions: ["0", "1", "3"],
       required: false,
       simpleRequired: true
     },
@@ -127,6 +130,7 @@ export default {
       timeDefaultValue: null,
       customClass: "",
       actionAttribute: ["0", "5", "6", "7"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "2", "3", "5", "6", "7"],
       required: false,
       simpleRequired: true
@@ -140,13 +144,14 @@ export default {
       labelWidth: 100,
       placeholder: "",
       // 显示类型
-      showType: "",
+      showType: "2",
       // 是否获取时间戳
       getTimestamp: false,
       // 格式
       format: "yyyy-MM-dd",
       customClass: "",
       actionAttribute: ["0", "5", "6"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "2", "3", "5", "6"],
       required: false,
       simpleRequired: true
@@ -167,6 +172,7 @@ export default {
       dataType: "0",
       customClass: "",
       actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "3", "6"],
       required: false,
       simpleRequired: true
@@ -181,6 +187,7 @@ export default {
       selectDefaultValue: false,
       customClass: "",
       actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "3"],
       required: false,
       simpleRequired: true
@@ -194,6 +201,7 @@ export default {
       defaultValue: "This is a text",
       customClass: "",
       actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1"]
     }
   ],
@@ -224,6 +232,7 @@ export default {
       promptCaption: "",
       customClass: "",
       actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "3"]
     },
     {
@@ -241,6 +250,7 @@ export default {
       maxUploadsNum: 8,
       customClass: "",
       actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "2", "3", "8", "9"]
     },
     {
@@ -253,25 +263,53 @@ export default {
       placeholder: "",
       customClass: "",
       actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "3", "6"]
     },
     {
+      icon: "",
+      type: "childTable",
       title: "子表单",
-      icon: ""
+      customizeLabelWidthDisabled: false,
+      labelWidth: 100,
+      customClass: "",
+      actionAttribute: ["0"],
+      actionAttributeDisabledOptions: ["0"],
+      actionAttributeOptions: ["0", "1", "3"]
     }
   ],
   布局字段: [
     {
+      icon: "",
+      // 不显示标题
+      isLayoutField: true,
+      type: "layout",
       title: "栅格布局",
-      icon: ""
+      // 栅格间隔
+      gutter: 0,
+      // Flex布局
+      flexLayout: true,
+      // 响应式布局
+      responsiveLayout: false,
+      // 列配置项
+      rowConfig: "",
+      // 水平排列方式
+      horizontalArrangement: "0",
+      // 垂直排列方式
+      verticalArrangement: "0",
+      customClass: "",
+      actionAttribute: [],
+      actionAttributeOptions: ["1"]
     },
     {
-      title: "标签页",
-      icon: ""
-    },
-    {
+      icon: "",
+      isLayoutField: true,
+      type: "divider",
       title: "分割线",
-      icon: ""
+      // 文案位置
+      textPosition: "0",
+      actionAttribute: [],
+      actionAttributeOptions: ["1"]
     }
   ]
 };

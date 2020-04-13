@@ -143,3 +143,50 @@ export const alignmentOptions = [
   { name: "右对齐", label: "1" },
   { name: "顶部对齐", label: "2" }
 ];
+
+// 文案位置
+export const textPositionOptions = [
+  { name: "左侧", label: "0" },
+  { name: "居中", label: "1" },
+  { name: "右侧", label: "2" }
+];
+
+// 水平排列方式
+export const horizontalArrangementOptions = [
+  {
+    value: "0",
+    label: "左对齐"
+  },
+  {
+    value: "1",
+    label: "右对齐"
+  },
+  {
+    value: "2",
+    label: "居中"
+  },
+  {
+    value: "3",
+    label: "两侧间隔相等"
+  },
+  {
+    value: "4",
+    label: "两端对齐"
+  }
+];
+
+// 垂直排列方式
+export const verticalArrangementOptions = [
+  {
+    value: "0",
+    label: "顶部对齐"
+  },
+  {
+    value: "1",
+    label: "居中"
+  },
+  {
+    value: "2",
+    label: "底部对齐"
+  }
+];

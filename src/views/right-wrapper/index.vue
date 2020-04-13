@@ -17,47 +17,42 @@
         <div class="tab-wrapper">
           <template v-if="fieldsShow('key')">
             <el-form-item label="字段标识">
-              <el-input
-                v-model="ruleForm.key"
-                placeholder="请输入字段标识"
-              ></el-input>
+              <el-input v-model="ruleForm.key"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('title')">
+          <template v-if="fieldsShow('title') && !ruleForm.isLayoutField">
             <el-form-item label="标题">
-              <el-input
-                v-model="ruleForm.title"
-                placeholder="请输入标题"
-              ></el-input>
+              <el-input v-model="ruleForm.title"></el-input>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('gutter')">
+            <el-form-item label="栅格间隔">
+              <el-input-number
+                v-model="ruleForm.gutter"
+                controls-position="right"
+              ></el-input-number>
             </el-form-item>
             <el-divider></el-divider>
           </template>
 
           <template v-if="fieldsShow('width')">
             <el-form-item label="宽度">
-              <el-input
-                v-model="ruleForm.width"
-                placeholder="请输入宽度"
-              ></el-input>
+              <el-input v-model="ruleForm.width"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('size')">
+          <template v-if="fieldsShow('imgWidth')">
             <el-form-item label="大小">
               <div class="" flex>
                 <div style="width:74px">宽度</div>
-                <el-input
-                  v-model="ruleForm.imgWidth"
-                  placeholder="请输入宽度"
-                ></el-input>
-                <div style="width:76px;padding-left:4px;">高度</div>
-                <el-input
-                  v-model="ruleForm.imgHeight"
-                  placeholder="请输入高度"
-                ></el-input>
+                <el-input v-model="ruleForm.imgWidth"></el-input>
+                <div style="width:78px;padding-left:4px;">高度</div>
+                <el-input v-model="ruleForm.imgHeight"></el-input>
               </div>
             </el-form-item>
             <el-divider></el-divider>
@@ -82,10 +77,7 @@
 
           <template v-if="fieldsShow('showType')">
             <el-form-item label="显示类型">
-              <el-select
-                v-model="ruleForm.showType"
-                placeholder="请选择显示类型"
-              >
+              <el-select v-model="ruleForm.showType">
                 <el-option
                   v-for="item in showTypeOptions"
                   :key="item.value"
@@ -100,12 +92,59 @@
 
           <template v-if="fieldsShow('bindingDataType')">
             <el-form-item label="绑定数据类型">
-              <el-select
-                v-model="ruleForm.bindingDataType"
-                placeholder="请选择绑定数据类型"
-              >
+              <el-select v-model="ruleForm.bindingDataType">
                 <el-option
                   v-for="item in bindingDataTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('flexLayout')">
+            <el-form-item label="Flex布局">
+              <el-switch v-model="ruleForm.flexLayout"> </el-switch>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('responsiveLayout')">
+            <el-form-item label="响应式布局">
+              <el-switch v-model="ruleForm.responsiveLayout"> </el-switch>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <!-- 待完善 -->
+          <template v-if="fieldsShow('rowConfig')">
+            <el-form-item label="列配置项"> </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('horizontalArrangement')">
+            <el-form-item label="水平排列方式">
+              <el-select v-model="ruleForm.horizontalArrangement">
+                <el-option
+                  v-for="item in horizontalArrangementOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('verticalArrangement')">
+            <el-form-item label="垂直排列方式">
+              <el-select v-model="ruleForm.verticalArrangement">
+                <el-option
+                  v-for="item in verticalArrangementOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -132,30 +171,14 @@
 
           <template v-if="fieldsShow('placeholder')">
             <el-form-item label="占位内容">
-              <el-input
-                v-model="ruleForm.placeholder"
-                placeholder="请输入占位内容"
-              ></el-input>
-            </el-form-item>
-            <el-divider></el-divider>
-          </template>
-
-          <template v-if="fieldsShow('promptCaption')">
-            <el-form-item label="提示说明文字">
-              <el-input
-                v-model="ruleForm.promptCaption"
-                placeholder="请输入提示说明文字"
-              ></el-input>
+              <el-input v-model="ruleForm.placeholder"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
 
           <template v-if="fieldsShow('format')">
             <el-form-item label="格式">
-              <el-input
-                v-model="ruleForm.format"
-                placeholder="请输入格式"
-              ></el-input>
+              <el-input v-model="ruleForm.format"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -177,10 +200,7 @@
 
           <template v-if="fieldsShow('defaultValue')">
             <el-form-item label="默认值" prop="defaultValue">
-              <el-input
-                v-model="ruleForm.defaultValue"
-                placeholder="请输入默认值"
-              ></el-input>
+              <el-input v-model="ruleForm.defaultValue"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -252,10 +272,14 @@
 
           <template v-if="fieldsShow('maxUploadsNum')">
             <el-form-item label="最大上传数">
-              <el-input
-                v-model="ruleForm.maxUploadsNum"
-                placeholder="请输入最大上传数"
-              ></el-input>
+              <el-input v-model="ruleForm.maxUploadsNum"></el-input>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('promptCaption')">
+            <el-form-item label="提示说明文字">
+              <el-input v-model="ruleForm.promptCaption"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -297,10 +321,21 @@
 
           <template v-if="fieldsShow('customClass')">
             <el-form-item label="自定义Class">
-              <el-input
-                v-model="ruleForm.customClass"
-                placeholder="请输入自定义Class"
-              ></el-input>
+              <el-input v-model="ruleForm.customClass"></el-input>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template v-if="fieldsShow('textPosition')">
+            <el-form-item label="文案位置">
+              <el-radio-group v-model="ruleForm.textPosition">
+                <el-radio-button
+                  v-for="item in textPositionOptions"
+                  :label="item.label"
+                  :key="item.label"
+                  >{{ item.name }}</el-radio-button
+                >
+              </el-radio-group>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -310,8 +345,13 @@
               <el-checkbox-group v-model="ruleForm.actionAttribute">
                 <el-checkbox
                   :label="item.value"
-                  :disabled="ruleForm.dataBingingDisabled"
                   :key="item.value"
+                  :disabled="
+                    ruleForm.actionAttributeDisabledOptions &&
+                      ruleForm.actionAttributeDisabledOptions.includes(
+                        item.value
+                      )
+                  "
                   v-for="item in actionAttributeOptions.filter(pItem =>
                     ruleForm.actionAttributeOptions.includes(pItem.value)
                   )"
@@ -330,7 +370,6 @@
                 >
                 <el-select
                   v-model="ruleForm.requiredType"
-                  placeholder="请选择"
                   flex-box="1"
                   v-if="!ruleForm.simpleRequired"
                 >
@@ -389,10 +428,7 @@
           <el-divider></el-divider>
 
           <el-form-item label="自定义Class" prop="formCustomClass">
-            <el-input
-              v-model="rightRuleForm.formCustomClass"
-              placeholder="请输入自定义Class"
-            ></el-input>
+            <el-input v-model="rightRuleForm.formCustomClass"></el-input>
           </el-form-item>
           <el-divider></el-divider>
         </div>
@@ -409,7 +445,10 @@ import {
   actionAttributeOptions,
   showTypeOptions,
   bindingDataTypeOptions,
-  alignmentOptions
+  alignmentOptions,
+  textPositionOptions,
+  horizontalArrangementOptions,
+  verticalArrangementOptions
 } from "./config";
 
 export default {
@@ -432,6 +471,9 @@ export default {
       showTypeOptions,
       bindingDataTypeOptions,
       alignmentOptions,
+      textPositionOptions,
+      horizontalArrangementOptions,
+      verticalArrangementOptions,
       ruleForm: {},
       rightRuleForm: {
         // 表单宽度
