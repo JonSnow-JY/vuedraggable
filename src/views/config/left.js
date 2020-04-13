@@ -334,6 +334,14 @@ export default {
       responsiveLayout: false,
       // 列配置项
       rowConfig: "",
+      rowConfigOptions: [
+        {
+          value: "12"
+        },
+        {
+          value: "12"
+        }
+      ],
       // 水平排列方式
       horizontalArrangement: "0",
       // 垂直排列方式

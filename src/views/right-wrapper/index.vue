@@ -121,7 +121,34 @@
 
           <!-- 待完善 -->
           <template v-if="fieldsShow('rowConfig')">
-            <el-form-item label="列配置项"> </el-form-item>
+            <el-form-item label="列配置项">
+              <draggable
+                :list="ruleForm.rowConfigOptions"
+                :clone="cloneDog"
+                @start="centerDragStart"
+                @end="centerDragEnd"
+                @change="dragChange"
+                :move="dragMove"
+                v-bind="sortableOptions"
+              >
+                <div
+                  class="data-type-option data-type-option-row-config d2-mb-10"
+                  flex="main:center cross:center"
+                  :key="index"
+                  v-for="(item, index) in ruleForm.rowConfigOptions"
+                >
+                  <i class="icon iconfont icon-bars"></i>
+                  <el-input v-model="item.name"></el-input>
+                  <div
+                    class="jian-wrapper d2-ml-10"
+                    flex="main:center cross:center"
+                  >
+                    <i class="icon iconfont icon-jian1"></i>
+                  </div>
+                </div>
+              </draggable>
+              <el-button type="text" class="add-options">添加选项</el-button>
+            </el-form-item>
             <el-divider></el-divider>
           </template>
 
@@ -672,6 +699,7 @@ export default {
       }
     }
   }
+
   .add-options {
     margin-left: 24px;
   }
