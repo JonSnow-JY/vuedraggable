@@ -316,30 +316,41 @@
                 >
               </el-radio-group>
 
-              <draggable
-                v-if="ruleForm.dataType === '0'"
-                :list="ruleForm.radioOptions"
-                :clone="cloneDog"
-                @start="centerDragStart"
-                @end="centerDragEnd"
-                @change="dragChange"
-                :move="dragMove"
-                v-bind="sortableOptions"
-              >
-                <div
-                  class="data-type-option d2-mb-10"
-                  flex="main:center cross:center"
-                  :key="index"
-                  v-for="(item, index) in ruleForm.radioOptions"
+              <template v-if="ruleForm.dataType === '0'">
+                <draggable
+                  :list="ruleForm.radioOptions"
+                  :clone="cloneDog"
+                  @start="centerDragStart"
+                  @end="centerDragEnd"
+                  @change="dragChange"
+                  :move="dragMove"
+                  v-bind="sortableOptions"
                 >
-                  <el-radio v-model="radio" size="medium"></el-radio>
-                  <el-input v-model="item.name"></el-input>
-                  <i class="icon iconfont icon-bars"></i>
-                  <div class="jian-wrapper" flex="main:center cross:center">
-                    <i class="icon iconfont icon-jian1"></i>
+                  <div
+                    class="data-type-option d2-mb-10"
+                    flex="main:center cross:center"
+                    :key="index"
+                    v-for="(item, index) in ruleForm.radioOptions"
+                  >
+                    <el-radio
+                      v-model="radio"
+                      size="medium"
+                      v-if="ruleForm.type === 'radio'"
+                    ></el-radio>
+                    <el-checkbox
+                      v-model="radio"
+                      size="medium"
+                      v-if="ruleForm.type === 'checkbox'"
+                    ></el-checkbox>
+                    <el-input v-model="item.name"></el-input>
+                    <i class="icon iconfont icon-bars"></i>
+                    <div class="jian-wrapper" flex="main:center cross:center">
+                      <i class="icon iconfont icon-jian1"></i>
+                    </div>
                   </div>
-                </div>
-              </draggable>
+                </draggable>
+                <el-button type="text" class="add-options">添加选项</el-button>
+              </template>
 
               <template v-if="ruleForm.dataType === '1'">
                 <el-radio-group v-model="radio" class="d2-mb-10">
@@ -612,6 +623,9 @@ export default {
     .el-radio {
       margin-right: 0 !important;
     }
+    .el-checkbox {
+      margin-right: 10px;
+    }
     .icon-bars {
       margin: 0 8px;
       font-size: 20px;
@@ -633,6 +647,9 @@ export default {
         color: #fff;
       }
     }
+  }
+  .add-options {
+    margin-left: 24px;
   }
 }
 </style>

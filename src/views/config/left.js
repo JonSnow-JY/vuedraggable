@@ -119,7 +119,20 @@ export default {
       layoutMethod: "0",
       showLabel: false,
       dataType: "0",
-      radioOptions: [],
+      radioOptions: [
+        {
+          label: "1",
+          name: "Option 1"
+        },
+        {
+          label: "2",
+          name: "Option 2"
+        },
+        {
+          label: "3",
+          name: "Option 3"
+        }
+      ],
       customClass: "",
       actionAttribute: ["0"],
       actionAttributeDisabledOptions: ["0"],
