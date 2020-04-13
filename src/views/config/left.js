@@ -1,12 +1,39 @@
 export default {
   基础字段: [
     {
+      // 图标
+      icon: "",
+      // 类型
+      type: "text",
+      // 标题
       title: "单行文本",
-      icon: ""
+      // 宽度
+      width: "100%",
+      // 标签宽度
+      labelWidth: 100,
+      // 自定义标签宽度
+      customizeLabelWidthDisabled: false,
+      // 占位内容
+      placeholder: "",
+      // 默认值
+      defaultValue: "",
+      // 自定义Class
+      customClass: "",
+      // 数据绑定选项的初始状态
+      dataBingingDisabled: true,
+      // 操作属性
+      actionAttribute: [0],
+      // 必填
+      required: false,
+      // 必填类型
+      requiredType: "",
+      // 必填的正则
+      requiredPattern: ""
     },
     {
       title: "多行文本",
-      icon: ""
+      icon: "",
+      type: "textarea"
     },
     {
       title: "计数器",

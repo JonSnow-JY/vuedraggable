@@ -13,8 +13,7 @@
             @end="leftDragEnd"
             v-bind="{
               group: { name: 'itemLeft', pull: 'clone', put: false },
-              sort: false,
-              onChange: log
+              sort: false
             }"
           >
             <el-col
@@ -75,7 +74,7 @@
             @click="setCenterActive(index)"
           >
             <el-form-item :label="item.title" class="form-item">
-              <el-input v-model="form.name" :rows="6"></el-input>
+              <el-input v-model="form.name"></el-input>
             </el-form-item>
             <div class="empty-item"></div>
             <template v-if="item.isActive">
@@ -94,7 +93,7 @@
       </el-form>
     </div>
     <div class="right">
-      <right-wrapper />
+      <right-wrapper :currentObj="currentObj" />
     </div>
   </div>
 </template>
@@ -133,7 +132,9 @@ export default {
         ghostClass: "sortable-ghost", //拖动元素的class的占位符的类名
         chosenClass: "sortable-chosen", // 选中元素的class
         dragClass: "sortable-drag" //拖动元素的class
-      }
+      },
+      // 当前选中的对象或者拖拽的对象
+      currentObj: null
     };
   },
   computed: {},
@@ -142,14 +143,14 @@ export default {
   mounted() {},
   destroyed() {},
   methods: {
-    log() {
-      console.log(999);
-    },
-    cloneDog({ title }) {
-      console.log(1111);
+    /**
+     * 拖拽结束之后，数据格式化处理
+     */
+    cloneDog(val) {
       return {
         id: now(),
-        title,
+        key: `input_${now()}`,
+        ...val,
         isActive: false
       };
     },
@@ -160,6 +161,9 @@ export default {
     leftDragStart() {
       console.log("leftDragStart");
     },
+    /**
+     * 左侧拖拽结束
+     */
     leftDragEnd(evt) {
       console.log("leftDragEnd");
       const { newIndex } = evt;
@@ -168,7 +172,8 @@ export default {
     centerDragStart() {
       console.log("centerDragStart");
     },
-    centerDragEnd() {
+    centerDragEnd(evt) {
+      console.log(evt);
       console.log("centerDragEnd");
       console.log(this.itemArr);
     },
@@ -186,6 +191,7 @@ export default {
       this.itemArr.map((item, idx) => {
         this.$set(this.itemArr[idx], "isActive", idx === index);
       });
+      this.currentObj = this.itemArr[index];
     },
     /**
      * 复制，快捷添加

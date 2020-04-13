@@ -10,63 +10,86 @@
     <el-tabs v-model="activeName" @tab-click="tabClick" :stretch="true">
       <el-tab-pane label="字段属性" name="field">
         <div class="tab-wrapper">
-          <el-form-item label="字段标识" prop="routerName">
+          <el-form-item label="字段标识" v-if="fieldsShow('key')">
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.key"
               placeholder="请输入字段标识"
             ></el-input>
           </el-form-item>
-          <el-form-item label="标题" prop="routerName">
+
+          <el-form-item label="标题" v-if="fieldsShow('title')">
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.title"
               placeholder="请输入标题"
             ></el-input>
           </el-form-item>
-          <el-form-item label="宽度" prop="routerName">
+
+          <el-form-item label="宽度" v-if="fieldsShow('width')">
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.width"
               placeholder="请输入宽度"
             ></el-input>
           </el-form-item>
-          <el-form-item label="标签宽度" prop="num">
-            <el-checkbox v-model="ruleForm.routerName" class="d2-mr-10"
+
+          <el-form-item label="标签宽度" v-if="fieldsShow('labelWidth')">
+            <el-checkbox
+              v-model="ruleForm.customizeLabelWidthDisabled"
+              class="d2-mr-10"
               >自定义</el-checkbox
             >
             <el-input-number
-              v-model="ruleForm.num"
+              v-model="ruleForm.labelWidth"
+              :disabled="!ruleForm.customizeLabelWidthDisabled"
               :min="1"
-              :max="10"
+              :max="400"
             ></el-input-number>
           </el-form-item>
-          <el-form-item label="占位内容" prop="routerName">
+
+          <el-form-item label="占位内容" v-if="fieldsShow('placeholder')">
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.placeholder"
               placeholder="请输入占位内容"
             ></el-input>
           </el-form-item>
-          <el-form-item label="默认值" prop="routerName">
+
+          <el-form-item
+            label="默认值"
+            prop="defaultValue"
+            v-if="fieldsShow('placeholder')"
+          >
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.defaultValue"
               placeholder="请输入默认值"
             ></el-input>
           </el-form-item>
-          <el-form-item label="操作属性" prop="actionAttribute">
+
+          <el-form-item label="自定义Class" v-if="fieldsShow('customClass')">
+            <el-input
+              v-model="ruleForm.customClass"
+              placeholder="请输入自定义Class"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="操作属性" v-if="fieldsShow('actionAttribute')">
             <el-checkbox-group v-model="ruleForm.actionAttribute">
-              <el-checkbox label="数据绑定"></el-checkbox>
-              <el-checkbox label="隐藏"></el-checkbox>
-              <el-checkbox label="禁用"></el-checkbox>
-              <el-checkbox label="显示密码"></el-checkbox>
-              <el-checkbox label="文本框可输入"></el-checkbox>
-              <el-checkbox label="显示清除按钮"></el-checkbox>
+              <el-checkbox :label="0" :disabled="ruleForm.dataBingingDisabled"
+                >数据绑定</el-checkbox
+              >
+              <el-checkbox :label="1">隐藏</el-checkbox>
+              <el-checkbox :label="2">禁用</el-checkbox>
+              <el-checkbox :label="3">显示密码</el-checkbox>
+              <el-checkbox :label="4">文本框可输入</el-checkbox>
+              <el-checkbox :label="5">显示清除按钮</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="校验" prop="routerName">
+
+          <el-form-item label="校验" v-if="fieldsShow('required')">
             <div class="" flex>
-              <el-checkbox v-model="ruleForm.routerName" class="d2-mr-10"
+              <el-checkbox v-model="ruleForm.required" class="d2-mr-10"
                 >必填</el-checkbox
               >
               <el-select
-                v-model="ruleForm.routerName"
+                v-model="ruleForm.requiredType"
                 placeholder="请选择"
                 flex-box="1"
               >
@@ -80,11 +103,12 @@
               </el-select>
             </div>
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.requiredPattern"
               class="d2-mt-10"
               placeholder="请填写正则表达式"
             ></el-input>
           </el-form-item>
+
           <el-form-item label="最小值" prop="num">
             <el-input-number
               v-model="ruleForm.num"
@@ -92,6 +116,7 @@
               :max="10"
             ></el-input-number>
           </el-form-item>
+
           <el-form-item label="最大值" prop="num">
             <el-input-number
               v-model="ruleForm.num"
@@ -99,6 +124,7 @@
               :max="10"
             ></el-input-number>
           </el-form-item>
+
           <el-form-item label="步长" prop="num">
             <el-input-number
               v-model="ruleForm.num"
@@ -106,6 +132,7 @@
               :max="10"
             ></el-input-number>
           </el-form-item>
+
           <el-form-item label="默认值" prop="num">
             <el-input-number
               v-model="ruleForm.num"
@@ -113,6 +140,7 @@
               :max="10"
             ></el-input-number>
           </el-form-item>
+
           <el-form-item label="布局方式" prop="layoutMethod">
             <el-checkbox-group v-model="ruleForm.layoutMethod">
               <el-checkbox-button
@@ -123,9 +151,11 @@
               >
             </el-checkbox-group>
           </el-form-item>
+
           <el-form-item label="是否显示标签" prop="layoutMethod">
             <el-switch v-model="ruleForm.layoutMethod"> </el-switch>
           </el-form-item>
+
           <el-form-item label="选项" prop="layoutMethod">
             <el-checkbox-group v-model="ruleForm.layoutMethod">
               <el-checkbox-button
@@ -184,7 +214,13 @@ export default {
   name: "",
   components: {},
   mixins: [],
-  props: {},
+  props: {
+    // 当前选中或者拖拽的数据对象
+    currentObj: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {
       regularTypes: [
@@ -225,8 +261,6 @@ export default {
       dataTypeOptions: ["静态数据", "动态数据"],
       ruleForm: {
         num: 1,
-        // 操作属性
-        actionAttribute: [],
         // 布局方式
         layoutMethod: ""
       },
@@ -235,7 +269,15 @@ export default {
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    currentObj: {
+      deep: true,
+      handler: function(val) {
+        console.log(val);
+        this.ruleForm = val;
+      }
+    }
+  },
   created() {},
   mounted() {},
   destroyed() {},
@@ -245,6 +287,12 @@ export default {
      */
     tabClick(val) {
       console.log(val);
+    },
+    /**
+     * 字段是否显示（通过key字段验证）
+     */
+    fieldsShow(key) {
+      return Object.keys(this.ruleForm).includes(key);
     }
   }
 };
