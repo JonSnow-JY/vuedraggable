@@ -127,7 +127,6 @@
             <el-form-item label="是否获取时间戳">
               <el-switch v-model="ruleForm.getTimestamp"> </el-switch>
             </el-form-item>
-
             <el-divider></el-divider>
           </template>
 
@@ -138,7 +137,6 @@
                 placeholder="请输入占位内容"
               ></el-input>
             </el-form-item>
-
             <el-divider></el-divider>
           </template>
 
