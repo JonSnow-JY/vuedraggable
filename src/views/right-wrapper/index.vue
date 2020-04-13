@@ -371,6 +371,30 @@
             <el-divider></el-divider>
           </template>
 
+          <template v-if="fieldsShow('dynamicData')">
+            <el-form-item label="动态数据">
+              <el-radio-group v-model="radio" class="d2-mb-10">
+                <el-radio :label="0">赋值变量</el-radio>
+                <el-radio :label="1">方法函数</el-radio>
+              </el-radio-group>
+              <el-input v-model="radio" class="d2-mb-10"></el-input>
+              <el-input v-model="radio" class="d2-mb-10">
+                <template slot="prepend"
+                  >值<span style="padding-left:24px;"></span
+                ></template>
+              </el-input>
+              <el-input v-model="radio" class="d2-mb-10">
+                <template slot="prepend"
+                  >标签<span style="padding-left:12px;"></span
+                ></template>
+              </el-input>
+              <el-input v-model="radio">
+                <template slot="prepend">子选项</template>
+              </el-input>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
           <template v-if="fieldsShow('customClass')">
             <el-form-item label="自定义Class">
               <el-input v-model="ruleForm.customClass"></el-input>

@@ -196,6 +196,20 @@ export default {
       canSearch: false,
       showLabel: false,
       dataType: "0",
+      radioOptions: [
+        {
+          label: "1",
+          name: "Option 1"
+        },
+        {
+          label: "2",
+          name: "Option 2"
+        },
+        {
+          label: "3",
+          name: "Option 3"
+        }
+      ],
       customClass: "",
       actionAttribute: ["0"],
       actionAttributeDisabledOptions: ["0"],
@@ -287,6 +301,7 @@ export default {
       customizeLabelWidthDisabled: false,
       labelWidth: 100,
       placeholder: "",
+      dynamicData: "",
       customClass: "",
       actionAttribute: ["0"],
       actionAttributeDisabledOptions: ["0"],
