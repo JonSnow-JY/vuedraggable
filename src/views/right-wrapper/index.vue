@@ -1,9 +1,7 @@
 <template lang="html">
   <el-form
     :model="ruleForm"
-    :rules="rules"
     ref="ruleForm"
-    label-width="80px"
     label-position="top"
     class="right-wrapper"
   >
@@ -29,6 +27,21 @@
               v-model="ruleForm.width"
               placeholder="请输入宽度"
             ></el-input>
+          </el-form-item>
+
+          <el-form-item label="大小" v-if="fieldsShow('size')">
+            <div class="" flex>
+              <div style="width:74px">宽度</div>
+              <el-input
+                v-model="ruleForm.imgWidth"
+                placeholder="请输入宽度"
+              ></el-input>
+              <div style="width:76px;padding-left:4px;">高度</div>
+              <el-input
+                v-model="ruleForm.imgHeight"
+                placeholder="请输入高度"
+              ></el-input>
+            </div>
           </el-form-item>
 
           <el-form-item label="标签宽度" v-if="fieldsShow('labelWidth')">
@@ -57,6 +70,24 @@
             </el-select>
           </el-form-item>
 
+          <el-form-item
+            label="绑定数据类型"
+            v-if="fieldsShow('bindingDataType')"
+          >
+            <el-select
+              v-model="ruleForm.bindingDataType"
+              placeholder="请选择绑定数据类型"
+            >
+              <el-option
+                v-for="item in bindingDataTypeOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+
           <el-form-item label="是否为范围选择" v-if="fieldsShow('rangeSelect')">
             <el-switch v-model="ruleForm.rangeSelect"> </el-switch>
           </el-form-item>
@@ -72,6 +103,13 @@
             <el-input
               v-model="ruleForm.placeholder"
               placeholder="请输入占位内容"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="提示说明文字" v-if="fieldsShow('promptCaption')">
+            <el-input
+              v-model="ruleForm.promptCaption"
+              placeholder="请输入提示说明文字"
             ></el-input>
           </el-form-item>
 
@@ -108,7 +146,7 @@
           <el-form-item label="最小值" v-if="fieldsShow('min')">
             <el-input-number
               v-model="ruleForm.min"
-              :min="1"
+              :min="0"
               :max="10"
             ></el-input-number>
           </el-form-item>
@@ -116,7 +154,7 @@
           <el-form-item label="最大值" v-if="fieldsShow('max')">
             <el-input-number
               v-model="ruleForm.max"
-              :min="1"
+              :min="0"
               :max="10"
             ></el-input-number>
           </el-form-item>
@@ -150,6 +188,13 @@
 
           <el-form-item label="是否多选" v-if="fieldsShow('multiSelect')">
             <el-switch v-model="ruleForm.multiSelect"> </el-switch>
+          </el-form-item>
+
+          <el-form-item label="最大上传数" v-if="fieldsShow('maxUploadsNum')">
+            <el-input
+              v-model="ruleForm.maxUploadsNum"
+              placeholder="请输入最大上传数"
+            ></el-input>
           </el-form-item>
 
           <el-form-item label="是否可搜索" v-if="fieldsShow('canSearch')">
@@ -227,37 +272,36 @@
       </el-tab-pane>
 
       <el-tab-pane label="表单属性" name="form">
-        <div class="tab-wrapper" v-if="false">
-          <el-form-item label="表单宽度" prop="routerName">
+        <div class="tab-wrapper">
+          <el-form-item label="表单宽度" prop="formWidth">
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.formWidth"
               placeholder="请输入表单宽度"
             ></el-input>
           </el-form-item>
-          <el-form-item label="标签对齐方式" prop="routerName">
-            <el-radio-group v-model="ruleForm.routerName">
-              <el-radio-button label="左对齐"></el-radio-button>
-              <el-radio-button label="右对齐"></el-radio-button>
-              <el-radio-button label="顶部对齐"></el-radio-button>
+
+          <el-form-item label="标签对齐方式" prop="tagAlignment">
+            <el-radio-group v-model="ruleForm.tagAlignment">
+              <el-radio-button
+                :label="item.label"
+                :key="index"
+                v-for="(item, index) in alignmentOptions"
+                >{{ item.name }}</el-radio-button
+              >
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="表单标签宽度" prop="num">
+
+          <el-form-item label="表单标签宽度" prop="formLabelWidth">
             <el-input-number
-              v-model="ruleForm.num"
-              :min="1"
-              :max="10"
+              v-model="ruleForm.formLabelWidth"
+              :min="0"
+              :max="1000"
             ></el-input-number>
           </el-form-item>
-          <el-form-item label="组件尺寸" prop="routerName">
-            <el-radio-group v-model="ruleForm.routerName">
-              <el-radio-button label="medium"></el-radio-button>
-              <el-radio-button label="small"></el-radio-button>
-              <el-radio-button label="mini"></el-radio-button>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="自定义Class" prop="routerName">
+
+          <el-form-item label="自定义Class" prop="formCustomClass">
             <el-input
-              v-model="ruleForm.routerName"
+              v-model="ruleForm.formCustomClass"
               placeholder="请输入自定义Class"
             ></el-input>
           </el-form-item>
@@ -273,7 +317,9 @@ import {
   layoutOptions,
   dataTypeOptions,
   actionAttributeOptions,
-  showTypeOptions
+  showTypeOptions,
+  bindingDataTypeOptions,
+  alignmentOptions
 } from "./config";
 
 export default {
@@ -294,8 +340,18 @@ export default {
       dataTypeOptions,
       actionAttributeOptions,
       showTypeOptions,
-      ruleForm: {},
-      rules: {},
+      bindingDataTypeOptions,
+      alignmentOptions,
+      ruleForm: {
+        // 表单宽度
+        formWidth: "100%",
+        // 标签对齐方式
+        tagAlignment: "0",
+        // 表单标签宽度
+        formLabelWidth: 100,
+        // 自定义Class
+        formCustomClass: ""
+      },
       activeName: "field"
     };
   },
@@ -303,9 +359,20 @@ export default {
   watch: {
     currentObj: {
       deep: true,
-      handler: function(val) {
-        console.log(val);
-        this.ruleForm = val;
+      handler: function(newVal, oldVal) {
+        const {
+          formWidth,
+          tagAlignment,
+          formCustomClass,
+          formLabelWidth
+        } = oldVal;
+        this.ruleForm = {
+          ...newVal,
+          formWidth,
+          tagAlignment,
+          formCustomClass,
+          formLabelWidth
+        };
       }
     }
   },

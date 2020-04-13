@@ -199,20 +199,61 @@ export default {
   ],
   高级字段: [
     {
+      icon: "",
+      type: "customArea",
       title: "自定义区域",
-      icon: ""
+      width: "",
+      customizeLabelWidthDisabled: false,
+      labelWidth: 100,
+      // 绑定数据类型
+      bindingDataType: "0",
+      customClass: "",
+      actionAttribute: ["0"],
+      actionAttributeOptions: ["0", "1"]
     },
     {
+      icon: "",
+      type: "file",
       title: "文件",
-      icon: ""
+      width: "",
+      customizeLabelWidthDisabled: false,
+      labelWidth: 100,
+      // 最大上传数
+      maxUploadsNum: "9",
+      // 提示说明文字
+      promptCaption: "",
+      customClass: "",
+      actionAttribute: ["0"],
+      actionAttributeOptions: ["0", "1", "3"]
     },
     {
+      icon: "",
+      type: "img",
       title: "图片",
-      icon: ""
+      width: "",
+      // 大小
+      imgWidth: "", //宽度
+      imgHeight: "", //高度
+      customizeLabelWidthDisabled: false,
+      labelWidth: 100,
+      min: 0,
+      multiSelect: false,
+      maxUploadsNum: 8,
+      customClass: "",
+      actionAttribute: ["0"],
+      actionAttributeOptions: ["0", "1", "2", "3", "8", "9"]
     },
     {
+      icon: "",
+      type: "caccader",
       title: "级联选择器",
-      icon: ""
+      width: "",
+      customizeLabelWidthDisabled: false,
+      labelWidth: 100,
+      placeholder: "",
+      customClass: "",
+      actionAttribute: ["0"],
+      actionAttributeOptions: ["0", "1", "3", "6"]
     },
     {
       title: "子表单",

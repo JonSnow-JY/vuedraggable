@@ -79,6 +79,14 @@ export const actionAttributeOptions = [
   {
     value: "7",
     label: "使用箭头进行时间选择"
+  },
+  {
+    value: "8",
+    label: "可删除"
+  },
+  {
+    value: "9",
+    label: "可编辑"
   }
 ];
 
@@ -112,4 +120,26 @@ export const showTypeOptions = [
     value: "6",
     label: "daterange"
   }
+];
+
+export const bindingDataTypeOptions = [
+  {
+    value: "0",
+    label: "字符串"
+  },
+  {
+    value: "1",
+    label: "对象"
+  },
+  {
+    value: "2",
+    label: "数组"
+  }
+];
+
+// 标签对齐方式
+export const alignmentOptions = [
+  { name: "左对齐", label: "0" },
+  { name: "右对齐", label: "1" },
+  { name: "顶部对齐", label: "2" }
 ];
