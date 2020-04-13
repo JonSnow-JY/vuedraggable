@@ -138,7 +138,43 @@
           </el-form-item>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="表单属性" name="form"></el-tab-pane>
+      <el-tab-pane label="表单属性" name="form">
+        <div class="tab-wrapper">
+          <el-form-item label="表单宽度" prop="routerName">
+            <el-input
+              v-model="ruleForm.routerName"
+              placeholder="请输入表单宽度"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="标签对齐方式" prop="routerName">
+            <el-radio-group v-model="ruleForm.routerName">
+              <el-radio-button label="左对齐"></el-radio-button>
+              <el-radio-button label="右对齐"></el-radio-button>
+              <el-radio-button label="顶部对齐"></el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="表单标签宽度" prop="num">
+            <el-input-number
+              v-model="ruleForm.num"
+              :min="1"
+              :max="10"
+            ></el-input-number>
+          </el-form-item>
+          <el-form-item label="组件尺寸" prop="routerName">
+            <el-radio-group v-model="ruleForm.routerName">
+              <el-radio-button label="medium"></el-radio-button>
+              <el-radio-button label="small"></el-radio-button>
+              <el-radio-button label="mini"></el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="自定义Class" prop="routerName">
+            <el-input
+              v-model="ruleForm.routerName"
+              placeholder="请输入自定义Class"
+            ></el-input>
+          </el-form-item>
+        </div>
+      </el-tab-pane>
     </el-tabs>
   </el-form>
 </template>
@@ -226,6 +262,9 @@ export default {
   }
   .el-form-item__label {
     line-height: 14px !important;
+  }
+  .el-checkbox__label {
+    font-size: 13px !important;
   }
   .el-tabs__header {
     margin-bottom: 0 !important;
