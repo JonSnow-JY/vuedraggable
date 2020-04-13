@@ -88,7 +88,20 @@ export default {
       // 数据类型
       dataType: "0",
       // 选项
-      radioOptions: [],
+      radioOptions: [
+        {
+          label: "1",
+          name: "Option 1"
+        },
+        {
+          label: "2",
+          name: "Option 2"
+        },
+        {
+          label: "3",
+          name: "Option 3"
+        }
+      ],
       customClass: "",
       actionAttribute: ["0"],
       actionAttributeDisabledOptions: ["0"],

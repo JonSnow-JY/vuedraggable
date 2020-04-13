@@ -155,7 +155,11 @@ export default {
       };
     },
     leftClick(index, key) {
-      this.itemArr.push({ ...this.leftConfig[key][index], id: now() });
+      this.itemArr.push({
+        ...this.leftConfig[key][index],
+        id: now(),
+        key: `input_${now()}`
+      });
       this.setCenterActive(this.itemArr.length - 1);
     },
     leftDragStart() {
@@ -197,7 +201,10 @@ export default {
      * 复制，快捷添加
      */
     doCopy(index) {
-      this.itemArr.splice(index, 0, { ...this.itemArr[index], id: now() });
+      this.itemArr.splice(index, 0, {
+        ...this.itemArr[index],
+        id: now()
+      });
       this.setCenterActive(index + 1);
     },
     /**
@@ -213,6 +220,7 @@ export default {
      */
     doClear() {
       this.itemArr = [];
+      this.currentObj = {};
     }
   }
 };

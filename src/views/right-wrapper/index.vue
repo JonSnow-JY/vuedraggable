@@ -307,7 +307,7 @@
 
           <template v-if="fieldsShow('dataType')">
             <el-form-item label="选项">
-              <el-radio-group v-model="ruleForm.dataType">
+              <el-radio-group v-model="ruleForm.dataType" class="d2-mb-10">
                 <el-radio-button
                   v-for="item in dataTypeOptions"
                   :label="item.label"
@@ -315,6 +315,29 @@
                   >{{ item.name }}</el-radio-button
                 >
               </el-radio-group>
+              <draggable
+                :list="ruleForm.radioOptions"
+                :clone="cloneDog"
+                @start="centerDragStart"
+                @end="centerDragEnd"
+                @change="dragChange"
+                :move="dragMove"
+                v-bind="sortableOptions"
+              >
+                <div
+                  class="data-type-option d2-mb-10"
+                  flex="main:center cross:center"
+                  :key="index"
+                  v-for="(item, index) in ruleForm.radioOptions"
+                >
+                  <el-radio v-model="radio" size="medium"></el-radio>
+                  <el-input v-model="item.name"></el-input>
+                  <i class="icon iconfont icon-bars"></i>
+                  <div class="jian-wrapper" flex="main:center cross:center">
+                    <i class="icon iconfont icon-jian1"></i>
+                  </div>
+                </div>
+              </draggable>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -451,9 +474,11 @@ import {
   verticalArrangementOptions
 } from "./config";
 
+import draggable from "vuedraggable";
+
 export default {
   name: "",
-  components: {},
+  components: { draggable },
   mixins: [],
   props: {
     // 当前选中或者拖拽的数据对象
@@ -485,7 +510,15 @@ export default {
         // 自定义Class
         formCustomClass: ""
       },
-      activeName: "field"
+      activeName: "field",
+      radio: "1",
+      sortableOptions: {
+        animation: 300,
+        handle: ".icon-bars",
+        ghostClass: "sortable-ghost", //拖动元素的class的占位符的类名
+        chosenClass: "sortable-chosen", // 选中元素的class
+        dragClass: "sortable-drag" //拖动元素的class
+      }
     };
   },
   computed: {},
@@ -513,7 +546,12 @@ export default {
     fieldsShow(key) {
       const tempArr = Object.keys(this.ruleForm);
       return tempArr.length && tempArr.includes(key);
-    }
+    },
+    cloneDog() {},
+    centerDragStart() {},
+    centerDragEnd() {},
+    dragChange() {},
+    dragMove() {}
   }
 };
 </script>
@@ -551,6 +589,32 @@ export default {
   .el-divider--horizontal {
     margin-top: 12px !important;
     margin-bottom: 12px !important;
+  }
+  .data-type-option {
+    .el-radio {
+      margin-right: 0 !important;
+    }
+    .icon-bars {
+      margin: 0 8px;
+      font-size: 20px;
+      color: #606266;
+      cursor: move;
+    }
+    .jian-wrapper {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #f56c6c;
+      background: #fef0f0;
+      border: 1px solid #fbc4c4;
+      cursor: pointer;
+      flex-shrink: 0;
+      &:hover {
+        background: #f56c6c;
+        border-color: #f56c6c;
+        color: #fff;
+      }
+    }
   }
 }
 </style>
