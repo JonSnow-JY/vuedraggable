@@ -1,3 +1,8 @@
 .el-form-item__label {
   font-size: 13px !important;
 }
+
+.el-date-editor,
+.el-select {
+  width: 100% !important;
+}
