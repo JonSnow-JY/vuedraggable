@@ -315,7 +315,9 @@
                   >{{ item.name }}</el-radio-button
                 >
               </el-radio-group>
+
               <draggable
+                v-if="ruleForm.dataType === '0'"
                 :list="ruleForm.radioOptions"
                 :clone="cloneDog"
                 @start="centerDragStart"
@@ -338,6 +340,22 @@
                   </div>
                 </div>
               </draggable>
+
+              <template v-if="ruleForm.dataType === '1'">
+                <el-radio-group v-model="radio" class="d2-mb-10">
+                  <el-radio :label="0">赋值变量</el-radio>
+                  <el-radio :label="1">方法函数</el-radio>
+                </el-radio-group>
+                <el-input v-model="radio" class="d2-mb-10"></el-input>
+                <el-input v-model="radio" class="d2-mb-10">
+                  <template slot="prepend"
+                    >值<span style="padding-left:12px;"></span
+                  ></template>
+                </el-input>
+                <el-input v-model="radio">
+                  <template slot="prepend">标签</template>
+                </el-input>
+              </template>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -511,7 +529,7 @@ export default {
         formCustomClass: ""
       },
       activeName: "field",
-      radio: "1",
+      radio: 0,
       sortableOptions: {
         animation: 300,
         handle: ".icon-bars",
