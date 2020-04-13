@@ -1,12 +1,19 @@
 <template lang="html">
-  <el-form
-    :model="ruleForm"
-    ref="ruleForm"
-    label-position="top"
+  <el-tabs
+    v-model="activeName"
+    @tab-click="tabClick"
+    :stretch="true"
     class="right-wrapper"
   >
-    <el-tabs v-model="activeName" @tab-click="tabClick" :stretch="true">
-      <el-tab-pane label="字段属性" name="field">
+    <el-tab-pane label="字段属性" name="field">
+      <div
+        class="empty-content"
+        flex="main:center cross:center"
+        v-if="!Object.keys(ruleForm).length"
+      >
+        请添加字段
+      </div>
+      <el-form :model="ruleForm" ref="ruleForm" label-position="top" v-else>
         <div class="tab-wrapper">
           <el-form-item label="字段标识" v-if="fieldsShow('key')">
             <el-input
@@ -269,19 +276,21 @@
             ></el-input>
           </el-form-item>
         </div>
-      </el-tab-pane>
+      </el-form>
+    </el-tab-pane>
 
-      <el-tab-pane label="表单属性" name="form">
+    <el-tab-pane label="表单属性" name="form">
+      <el-form :model="rightRuleForm" ref="rightRuleForm" label-position="top">
         <div class="tab-wrapper">
           <el-form-item label="表单宽度" prop="formWidth">
             <el-input
-              v-model="ruleForm.formWidth"
+              v-model="rightRuleForm.formWidth"
               placeholder="请输入表单宽度"
             ></el-input>
           </el-form-item>
 
           <el-form-item label="标签对齐方式" prop="tagAlignment">
-            <el-radio-group v-model="ruleForm.tagAlignment">
+            <el-radio-group v-model="rightRuleForm.tagAlignment">
               <el-radio-button
                 :label="item.label"
                 :key="index"
@@ -293,7 +302,7 @@
 
           <el-form-item label="表单标签宽度" prop="formLabelWidth">
             <el-input-number
-              v-model="ruleForm.formLabelWidth"
+              v-model="rightRuleForm.formLabelWidth"
               :min="0"
               :max="1000"
             ></el-input-number>
@@ -301,14 +310,14 @@
 
           <el-form-item label="自定义Class" prop="formCustomClass">
             <el-input
-              v-model="ruleForm.formCustomClass"
+              v-model="rightRuleForm.formCustomClass"
               placeholder="请输入自定义Class"
             ></el-input>
           </el-form-item>
         </div>
-      </el-tab-pane>
-    </el-tabs>
-  </el-form>
+      </el-form>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <script>
@@ -342,7 +351,8 @@ export default {
       showTypeOptions,
       bindingDataTypeOptions,
       alignmentOptions,
-      ruleForm: {
+      ruleForm: {},
+      rightRuleForm: {
         // 表单宽度
         formWidth: "100%",
         // 标签对齐方式
@@ -359,20 +369,8 @@ export default {
   watch: {
     currentObj: {
       deep: true,
-      handler: function(newVal, oldVal) {
-        const {
-          formWidth,
-          tagAlignment,
-          formCustomClass,
-          formLabelWidth
-        } = oldVal;
-        this.ruleForm = {
-          ...newVal,
-          formWidth,
-          tagAlignment,
-          formCustomClass,
-          formLabelWidth
-        };
+      handler: function(newVal) {
+        this.ruleForm = newVal;
       }
     }
   },
@@ -421,6 +419,11 @@ export default {
     padding: 10px;
     overflow: auto;
     overflow-x: hidden;
+  }
+  .empty-content {
+    height: calc(100vh - 42px);
+    font-size: 20px;
+    color: #ccc;
   }
 }
 </style>
