@@ -49,10 +49,18 @@
         >
       </el-radio-group>
 
-      <el-checkbox-group v-model="form.num" v-if="item.type === 'checkbox'">
-        <el-checkbox label="复选框 A"></el-checkbox>
-        <el-checkbox label="复选框 B"></el-checkbox>
-        <el-checkbox label="复选框 C"></el-checkbox>
+      <el-checkbox-group
+        v-model="item.checkboxDefault"
+        v-if="item.type === 'checkbox'"
+      >
+        <el-checkbox
+          :label="item1.label"
+          v-for="(item1, index1) in item.checkboxOptions"
+          :key="index1"
+          :class="item.customClass"
+          :disabled="item.actionAttribute.includes('3')"
+          >{{ item1.name }}</el-checkbox
+        >
       </el-checkbox-group>
 
       <el-time-select

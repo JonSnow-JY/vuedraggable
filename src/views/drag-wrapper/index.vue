@@ -157,7 +157,8 @@ export default {
 
 <style lang="scss">
 .form-wrapper {
-  .el-radio__label {
+  .el-radio__label,
+  .el-checkbox__label {
     font-size: 13px !important;
   }
   position: relative;

@@ -119,7 +119,6 @@
             <el-divider></el-divider>
           </template>
 
-          <!-- 待完善 -->
           <template v-if="fieldsShow('rowConfig')">
             <el-form-item label="列配置项">
               <draggable
@@ -344,47 +343,93 @@
               </el-radio-group>
 
               <template v-if="ruleForm.dataType === '0'">
-                <el-radio-group v-model="ruleForm.radioDefault">
-                  <draggable
-                    :list="ruleForm.radioOptions"
-                    :clone="cloneDog"
-                    :move="dragMove"
-                    v-bind="sortableOptions"
-                    @start="centerDragStart"
-                    @end="centerDragEnd"
-                    @change="dragChange"
-                  >
-                    <div
-                      class="data-type-option d2-mb-10"
-                      flex="main:center cross:center"
-                      :key="index"
-                      v-for="(item, index) in ruleForm.radioOptions"
+                <template v-if="fieldsShow('radioDefault')">
+                  <el-radio-group v-model="ruleForm.radioDefault">
+                    <draggable
+                      :list="ruleForm.radioOptions"
+                      :clone="cloneDog"
+                      :move="dragMove"
+                      v-bind="sortableOptions"
+                      @start="centerDragStart"
+                      @end="centerDragEnd"
+                      @change="dragChange"
                     >
-                      <el-radio
-                        :label="item.label"
-                        size="medium"
-                        flex="cross:center"
+                      <div
+                        class="data-type-option d2-mb-10"
+                        flex="main:center cross:center"
+                        :key="index"
+                        v-for="(item, index) in ruleForm.radioOptions"
                       >
-                        <div class="" flex="cross:center">
-                          <el-input v-model="item.name"></el-input>
-                          <i class="icon iconfont icon-bars"></i>
-                          <div
-                            class="jian-wrapper"
-                            flex="main:center cross:center"
-                          >
-                            <i class="icon iconfont icon-jian1"></i>
+                        <el-radio
+                          :label="item.label"
+                          size="medium"
+                          flex="cross:center"
+                        >
+                          <div class="" flex="cross:center">
+                            <el-input v-model="item.name"></el-input>
+                            <i class="icon iconfont icon-bars"></i>
+                            <div
+                              class="jian-wrapper"
+                              flex="main:center cross:center"
+                            >
+                              <i class="icon iconfont icon-jian1"></i>
+                            </div>
                           </div>
-                        </div>
-                      </el-radio>
-                    </div>
-                  </draggable>
-                </el-radio-group>
-                <el-button
-                  type="text"
-                  class="add-options"
-                  @click="addRadioOptions"
-                  >添加选项</el-button
-                >
+                        </el-radio>
+                      </div>
+                    </draggable>
+                  </el-radio-group>
+                  <el-button
+                    type="text"
+                    class="add-options"
+                    @click="addRadioOptions"
+                    >添加选项</el-button
+                  >
+                </template>
+
+                <template v-if="fieldsShow('checkboxDefault')">
+                  <el-checkbox-group v-model="ruleForm.checkboxDefault">
+                    <draggable
+                      :list="ruleForm.checkboxOptions"
+                      :clone="cloneDog"
+                      :move="dragMove"
+                      v-bind="sortableOptions"
+                      @start="centerDragStart"
+                      @end="centerDragEnd"
+                      @change="dragChange"
+                    >
+                      <div
+                        class="data-type-option d2-mb-10"
+                        flex="main:center cross:center"
+                        :key="index"
+                        v-for="(item, index) in ruleForm.checkboxOptions"
+                      >
+                        <el-checkbox
+                          :label="item.label"
+                          size="medium"
+                          flex="cross:center"
+                        >
+                          <div class="" flex="cross:center">
+                            <el-input v-model="item.name"></el-input>
+                            <i class="icon iconfont icon-bars"></i>
+                            <div
+                              class="jian-wrapper"
+                              flex="main:center cross:center"
+                            >
+                              <i class="icon iconfont icon-jian1"></i>
+                            </div>
+                          </div>
+                        </el-checkbox>
+                      </div>
+                    </draggable>
+                  </el-checkbox-group>
+                  <el-button
+                    type="text"
+                    class="add-options"
+                    @click="addCheckboxOptions"
+                    >添加选项</el-button
+                  >
+                </template>
               </template>
 
               <template v-if="ruleForm.dataType === '1'">
@@ -644,6 +689,12 @@ export default {
       this.ruleForm.radioOptions.push({
         name: "新选项",
         label: this.ruleForm.radioOptions.length
+      });
+    },
+    addCheckboxOptions() {
+      this.ruleForm.checkboxOptions.push({
+        name: "新选项",
+        label: this.ruleForm.checkboxOptions.length
       });
     }
   }

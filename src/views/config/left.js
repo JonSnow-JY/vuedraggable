@@ -87,6 +87,7 @@ export default {
       showLabel: false,
       // 数据类型
       dataType: "0",
+      // 单选框默认值
       radioDefault: "",
       // 选项
       radioOptions: [
@@ -120,7 +121,10 @@ export default {
       layoutMethod: "0",
       showLabel: false,
       dataType: "0",
-      radioOptions: [
+      // 多选框组默认值
+      checkboxDefault: [],
+      // 多选框配置文件
+      checkboxOptions: [
         {
           label: "1",
           name: "Option 1"
