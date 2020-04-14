@@ -235,26 +235,26 @@ export default {
       customizeLabelWidthDisabled: false,
       labelWidth: 100,
       // 开关默认值
-      selectDefaultValue: false,
+      switchDefaultValue: false,
       customClass: "",
       actionAttribute: ["0"],
       actionAttributeDisabledOptions: ["0"],
       actionAttributeOptions: ["0", "1", "3"],
       required: false,
       simpleRequired: true
-    },
-    {
-      icon: "",
-      type: "text",
-      title: "文字",
-      customizeLabelWidthDisabled: false,
-      labelWidth: 100,
-      defaultValue: "This is a text",
-      customClass: "",
-      actionAttribute: ["0"],
-      actionAttributeDisabledOptions: ["0"],
-      actionAttributeOptions: ["0", "1"]
     }
+    // {
+    //   icon: "",
+    //   type: "text",
+    //   title: "文字",
+    //   customizeLabelWidthDisabled: false,
+    //   labelWidth: 100,
+    //   defaultValue: "This is a text",
+    //   customClass: "",
+    //   actionAttribute: ["0"],
+    //   actionAttributeDisabledOptions: ["0"],
+    //   actionAttributeOptions: ["0", "1"]
+    // }
   ],
   高级字段: [
     {

@@ -349,9 +349,9 @@
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('selectDefaultValue')">
+          <template v-if="fieldsShow('switchDefaultValue')">
             <el-form-item label="默认值">
-              <el-switch v-model="ruleForm.selectDefaultValue"> </el-switch>
+              <el-switch v-model="ruleForm.switchDefaultValue"> </el-switch>
             </el-form-item>
             <el-divider></el-divider>
           </template>

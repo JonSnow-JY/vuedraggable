@@ -107,11 +107,17 @@
         </el-option>
       </el-select>
 
-      <el-switch v-model="form.num" v-if="item.type === 'switch'"> </el-switch>
+      <el-switch
+        v-model="item.switchDefaultValue"
+        v-if="item.type === 'switch'"
+        :class="item.customClass"
+        :disabled="item.actionAttribute.includes('3')"
+      >
+      </el-switch>
 
-      <div class="" v-if="item.type === 'text'">
+      <!-- <div class="" v-if="item.type === 'text'">
         文字
-      </div>
+      </div> -->
     </el-form-item>
     <div class="empty-item"></div>
     <template v-if="item.isActive">
