@@ -101,17 +101,18 @@ export default {
     cloneDog(val) {
       return {
         id: now(),
-        key: `input_${now()}`,
+        key: `${val.type}_${now()}`,
         ...val,
         isActive: false,
         tasks: []
       };
     },
     leftClick(index, key) {
+      const tempObj = this.leftConfig[key][index];
       this.itemArr.push({
-        ...this.leftConfig[key][index],
+        ...tempObj,
         id: now(),
-        key: `input_${now()}`,
+        key: `${tempObj.type}_${now()}`,
         tasks: []
       });
       this.setCenterActive(this.itemArr.length - 1);

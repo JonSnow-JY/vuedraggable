@@ -9,13 +9,18 @@
         v-if="item.type === 'inputText'"
         v-model="item.defaultValue"
         :style="{ width: item.width }"
+        :class="item.customClass"
         :placeholder="item.placeholder"
       ></el-input>
 
       <el-input
-        v-if="item.type === 'textarea'"
         type="textarea"
-        v-model="form.num"
+        v-if="item.type === 'textarea'"
+        :rows="4"
+        v-model="item.defaultValue"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        :placeholder="item.placeholder"
       ></el-input>
 
       <el-input-number
