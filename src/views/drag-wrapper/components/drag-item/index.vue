@@ -81,9 +81,19 @@
       </el-time-picker>
 
       <el-date-picker
-        v-model="form.num"
+        v-model="item.dateDefaultValue"
         v-if="item.type === 'datePicker'"
-        type="date"
+        :type="
+          showTypeOptions.find(item1 => item1.value === item.showType).label
+        "
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        :value-format="item.format"
+        :placeholder="item.placeholder"
+        :readonly="item.actionAttribute.includes('2')"
+        :disabled="item.actionAttribute.includes('3')"
+        :editable="item.actionAttribute.includes('5')"
+        :clearable="item.actionAttribute.includes('6')"
       >
       </el-date-picker>
 
@@ -113,6 +123,8 @@
 </template>
 
 <script>
+import { showTypeOptions } from "@/views/right-wrapper/config";
+
 export default {
   name: "",
   components: {},
@@ -132,7 +144,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      showTypeOptions
+    };
   },
   computed: {},
   watch: {},

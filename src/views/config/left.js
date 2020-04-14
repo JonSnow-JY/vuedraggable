@@ -182,6 +182,8 @@ export default {
       showType: "2",
       // 是否获取时间戳
       getTimestamp: false,
+      // 日期默认值
+      dateDefaultValue: null,
       // 格式
       format: "yyyy-MM-dd",
       customClass: "",
