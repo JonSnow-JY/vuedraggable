@@ -73,20 +73,43 @@
             :key="item.id"
             @click="setCenterActive(index)"
           >
-            <el-form-item :label="item.title" class="form-item">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <div class="empty-item"></div>
-            <template v-if="item.isActive">
-              <i class="icon iconfont icon-tuozhuai"></i>
-              <i
-                class="icon iconfont icon-lajitong"
-                @click.stop="doDel(index)"
-              ></i>
-              <i
-                class="icon iconfont icon-fuzhi1"
-                @click.stop="doCopy(index)"
-              ></i>
+            <!-- <el-row :gutter="0" v-if="item.type === 'layout'">
+              <draggable
+                :list="item.layoutOptions"
+                v-bind="sortableOptions"
+                :animation="100"
+                :empty-insert-threshold="60"
+              >
+                <el-col
+                  :span="12"
+                  v-for="item2 in item.layoutOptions"
+                  :key="item2.title"
+                >
+                  <div class="col-wrapper">
+                    {{ item2.title }}
+                  </div>
+                </el-col>
+              </draggable>
+            </el-row> -->
+
+            <nested v-if="item.type === 'layout'" :tasks="item.layoutOptions" />
+
+            <template v-else>
+              <el-form-item :label="item.title" class="form-item">
+                <el-input v-model="form.name"></el-input>
+              </el-form-item>
+              <div class="empty-item"></div>
+              <template v-if="item.isActive">
+                <i class="icon iconfont icon-tuozhuai"></i>
+                <i
+                  class="icon iconfont icon-lajitong"
+                  @click.stop="doDel(index)"
+                ></i>
+                <i
+                  class="icon iconfont icon-fuzhi1"
+                  @click.stop="doCopy(index)"
+                ></i>
+              </template>
             </template>
           </div>
         </draggable>
@@ -105,13 +128,16 @@ import leftConfig from "./config/left";
 
 import RightWrapper from "./right-wrapper";
 
+import Nested from "@/components/nested";
+
 import { now } from "lodash";
 
 export default {
   name: "",
   components: {
     draggable,
-    RightWrapper
+    RightWrapper,
+    Nested
   },
   mixins: [],
   props: {},
@@ -147,18 +173,21 @@ export default {
      * 拖拽结束之后，数据格式化处理
      */
     cloneDog(val) {
+      console.log(val);
       return {
         id: now(),
         key: `input_${now()}`,
         ...val,
-        isActive: false
+        isActive: false,
+        tasks: []
       };
     },
     leftClick(index, key) {
       this.itemArr.push({
         ...this.leftConfig[key][index],
         id: now(),
-        key: `input_${now()}`
+        key: `input_${now()}`,
+        tasks: []
       });
       this.setCenterActive(this.itemArr.length - 1);
     },
@@ -291,13 +320,13 @@ $width: 300px;
         padding: 2px;
         border: 1px dashed #999;
         position: relative;
-
         .item-wrapper {
           position: relative;
           border: 1px dashed #ccc;
           margin-bottom: 2px;
           border: 1px dashed hsla(0, 0%, 66.7%, 0.5);
           background: rgba(236, 245, 255, 0.3);
+          overflow: hidden;
           .empty-item {
             position: absolute;
             top: 0;
@@ -344,15 +373,12 @@ $width: 300px;
         }
         // 拖动元素的class的占位符的类名
         .sortable-ghost {
-          margin-bottom: 9px;
-          width: 100%;
           &.item-wrapper,
           &.el-col {
             background: red;
             border: none;
             height: 4px;
             width: 100%;
-            margin-top: 9px;
           }
           &.item-wrapper {
             .form-item,

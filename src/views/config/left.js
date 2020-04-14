@@ -334,6 +334,11 @@ export default {
       responsiveLayout: false,
       // 列配置项
       rowConfig: "",
+      // 栅格初始化，默认有两个栅格
+      layoutOptions: [
+        { span: 12, title: 1, tasks: [] },
+        { span: 12, title: 2, tasks: [] }
+      ],
       rowConfigOptions: [
         {
           value: "12"
