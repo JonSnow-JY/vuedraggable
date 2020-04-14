@@ -44,7 +44,7 @@ export default {
 .nested {
   margin: 5px;
   .draggable {
-    height: 100px;
+    min-height: 50px;
   }
   .box {
     border: 1px dashed #ccc;

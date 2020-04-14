@@ -73,25 +73,6 @@
             :key="item.id"
             @click="setCenterActive(index)"
           >
-            <!-- <el-row :gutter="0" v-if="item.type === 'layout'">
-              <draggable
-                :list="item.layoutOptions"
-                v-bind="sortableOptions"
-                :animation="100"
-                :empty-insert-threshold="60"
-              >
-                <el-col
-                  :span="12"
-                  v-for="item2 in item.layoutOptions"
-                  :key="item2.title"
-                >
-                  <div class="col-wrapper">
-                    {{ item2.title }}
-                  </div>
-                </el-col>
-              </draggable>
-            </el-row> -->
-
             <nested v-if="item.type === 'layout'" :tasks="item.layoutOptions" />
 
             <template v-else>
@@ -128,7 +109,7 @@ import leftConfig from "./config/left";
 
 import RightWrapper from "./right-wrapper";
 
-import Nested from "@/components/nested";
+import Nested from "./nested";
 
 import { now } from "lodash";
 
