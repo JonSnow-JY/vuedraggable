@@ -163,7 +163,7 @@ export default {
     },
     {
       icon: "",
-      type: "timePicker",
+      type: "datePicker",
       title: "日期选择器",
       width: "",
       customizeLabelWidthDisabled: false,

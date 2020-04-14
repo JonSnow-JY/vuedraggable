@@ -638,6 +638,11 @@ export default {
 
 <style lang="scss">
 .right-wrapper {
+  .el-date-editor,
+  .el-select,
+  .is-controls-right {
+    width: 100% !important;
+  }
   .el-tabs__item {
     height: 41px !important;
     line-height: 41px !important;
