@@ -201,24 +201,26 @@ export default {
       customizeLabelWidthDisabled: false,
       labelWidth: 100,
       placeholder: "",
+      // 下拉框默认值
+      selectDefaultValue: "",
       // 是否多选
-      multiSelect: false,
+      // multiple: false,
       // 是否可搜索
-      canSearch: false,
+      filterable: false,
       showLabel: false,
       dataType: "0",
-      radioOptions: [
+      selectOptions: [
         {
           label: "1",
-          name: "Option 1"
+          value: "Option 1"
         },
         {
           label: "2",
-          name: "Option 2"
+          value: "Option 2"
         },
         {
           label: "3",
-          name: "Option 3"
+          value: "Option 3"
         }
       ],
       customClass: "",

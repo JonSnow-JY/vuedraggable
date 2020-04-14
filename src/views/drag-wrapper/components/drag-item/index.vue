@@ -97,12 +97,21 @@
       >
       </el-date-picker>
 
-      <el-select v-model="form.num" v-if="item.type === 'select'">
+      <el-select
+        v-model="item.selectDefaultValue"
+        v-if="item.type === 'select'"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        :disabled="item.actionAttribute.includes('3')"
+        :clearable="item.actionAttribute.includes('6')"
+        :filterable="item.filterable"
+        :multiple="item.multiple"
+      >
         <el-option
-          v-for="item in []"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item1 in item.selectOptions"
+          :key="item1.value"
+          :label="item1.label"
+          :value="item1.value"
         >
         </el-option>
       </el-select>

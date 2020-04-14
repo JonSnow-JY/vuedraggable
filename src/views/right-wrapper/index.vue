@@ -314,9 +314,9 @@
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('multiSelect')">
+          <template v-if="fieldsShow('multiple')">
             <el-form-item label="是否多选">
-              <el-switch v-model="ruleForm.multiSelect"> </el-switch>
+              <el-switch v-model="ruleForm.multiple"> </el-switch>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -335,9 +335,9 @@
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('canSearch')">
+          <template v-if="fieldsShow('filterable')">
             <el-form-item label="是否可搜索">
-              <el-switch v-model="ruleForm.canSearch"> </el-switch>
+              <el-switch v-model="ruleForm.filterable"> </el-switch>
             </el-form-item>
             <el-divider></el-divider>
           </template>
@@ -392,6 +392,54 @@
                         >
                           <div class="" flex="cross:center">
                             <el-input v-model="item.name"></el-input>
+                            <i class="icon iconfont icon-bars"></i>
+                            <div
+                              class="jian-wrapper"
+                              flex="main:center cross:center"
+                            >
+                              <i class="icon iconfont icon-jian1"></i>
+                            </div>
+                          </div>
+                        </el-radio>
+                      </div>
+                    </draggable>
+                  </el-radio-group>
+                  <el-button
+                    type="text"
+                    class="add-options"
+                    @click="addRadioOptions"
+                    >添加选项</el-button
+                  >
+                </template>
+
+                <template v-if="fieldsShow('selectDefaultValue')">
+                  <el-radio-group v-model="ruleForm.selectDefaultValue">
+                    <draggable
+                      :list="ruleForm.selectOptions"
+                      :clone="cloneDog"
+                      :move="dragMove"
+                      v-bind="sortableOptions"
+                      @start="centerDragStart"
+                      @end="centerDragEnd"
+                      @change="dragChange"
+                    >
+                      <div
+                        class="data-type-option d2-mb-10"
+                        flex="main:center cross:center"
+                        :key="index"
+                        v-for="(item, index) in ruleForm.selectOptions"
+                      >
+                        <el-radio
+                          :label="item.label"
+                          size="medium"
+                          flex="cross:center"
+                        >
+                          <div class="" flex="cross:center">
+                            <el-input v-model="item.value"></el-input>
+                            <el-input
+                              v-model="item.label"
+                              v-if="ruleForm.showLabel"
+                            ></el-input>
                             <i class="icon iconfont icon-bars"></i>
                             <div
                               class="jian-wrapper"
