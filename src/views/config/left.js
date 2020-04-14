@@ -280,7 +280,7 @@ export default {
       customizeLabelWidthDisabled: false,
       labelWidth: 100,
       // 最大上传数
-      maxUploadsNum: "9",
+      limit: 9,
       // 提示说明文字
       promptCaption: "",
       customClass: "",

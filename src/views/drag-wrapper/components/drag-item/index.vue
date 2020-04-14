@@ -126,6 +126,7 @@
 
       <el-cascader
         v-model="item.cascaderDefaultValue"
+        v-if="item.type === 'cascader'"
         :options="item.cascaderOptions"
         :style="{ width: item.width }"
         :class="item.customClass"
@@ -133,6 +134,21 @@
         :disabled="item.actionAttribute.includes('3')"
         :clearable="item.actionAttribute.includes('6')"
       ></el-cascader>
+
+      <el-upload
+        class="upload-demo"
+        multiple
+        :limit="item.limit"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        action=""
+        v-if="item.type === 'file'"
+      >
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">
+          {{ item.promptCaption }}
+        </div>
+      </el-upload>
 
       <!-- <div class="" v-if="item.type === 'text'">
         文字

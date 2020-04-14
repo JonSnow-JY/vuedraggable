@@ -321,9 +321,9 @@
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('maxUploadsNum')">
+          <template v-if="fieldsShow('limit')">
             <el-form-item label="最大上传数">
-              <el-input v-model="ruleForm.maxUploadsNum"></el-input>
+              <el-input v-model="ruleForm.limit"></el-input>
             </el-form-item>
             <el-divider></el-divider>
           </template>
