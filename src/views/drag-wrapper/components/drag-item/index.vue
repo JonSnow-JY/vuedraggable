@@ -166,11 +166,13 @@
         文字
       </div> -->
     </el-form-item>
-    <div class="empty-item"></div>
-    <template v-if="item.isActive">
-      <i class="icon iconfont icon-tuozhuai"></i>
-      <i class="icon iconfont icon-lajitong" @click.stop="doDel(index)"></i>
-      <i class="icon iconfont icon-fuzhi1" @click.stop="doCopy(index)"></i>
+    <template v-if="canDrag">
+      <div class="empty-item"></div>
+      <template v-if="item.isActive">
+        <i class="icon iconfont icon-tuozhuai"></i>
+        <i class="icon iconfont icon-lajitong" @click.stop="doDel(index)"></i>
+        <i class="icon iconfont icon-fuzhi1" @click.stop="doCopy(index)"></i>
+      </template>
     </template>
   </div>
 </template>
@@ -194,6 +196,10 @@ export default {
     index: {
       type: Number,
       default: 0
+    },
+    canDrag: {
+      type: Boolean,
+      default: true
     }
   },
   data() {

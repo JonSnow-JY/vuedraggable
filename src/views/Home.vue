@@ -39,7 +39,7 @@
           :disabled="!itemArr.length"
           ><i class="icon iconfont icon-lajitong clear"></i>清空</el-button
         >
-        <el-button type="text" class="d2-mr-10">
+        <el-button type="text" class="d2-mr-10" @click="doPreview">
           <i class="icon iconfont icon-yulan preview"></i>预览</el-button
         >
       </div>
@@ -50,6 +50,12 @@
     <div class="right">
       <right-wrapper :currentObj="currentObj" />
     </div>
+
+    <!-- 预览弹窗 -->
+    <preview-dialog
+      :dialogVisible.sync="previewDialogVisible"
+      :itemArr="itemArr"
+    />
   </div>
 </template>
 
@@ -62,6 +68,8 @@ import RightWrapper from "./right-wrapper";
 
 import DragWrapper from "./drag-wrapper";
 
+import PreviewDialog from "./preview-dialog";
+
 import { now } from "lodash";
 
 export default {
@@ -69,7 +77,8 @@ export default {
   components: {
     draggable,
     RightWrapper,
-    DragWrapper
+    DragWrapper,
+    PreviewDialog
   },
   mixins: [],
   props: {},
@@ -79,7 +88,9 @@ export default {
       form: { num: "" },
       itemArr: [],
       // 当前选中的对象或者拖拽的对象
-      currentObj: null
+      currentObj: null,
+      // 预览开关
+      previewDialogVisible: false
     };
   },
   computed: {},
@@ -144,6 +155,12 @@ export default {
     doClear() {
       this.itemArr = [];
       this.currentObj = {};
+    },
+    /**
+     * 预览
+     */
+    doPreview() {
+      this.previewDialogVisible = true;
     }
   }
 };
