@@ -76,14 +76,21 @@ export default {
   data() {
     return {
       leftConfig,
-      form: { num: 0 },
+      form: { num: "" },
       itemArr: [],
       // 当前选中的对象或者拖拽的对象
       currentObj: null
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    currentObj: {
+      deep: true,
+      handler: function(val) {
+        console.log(val);
+      }
+    }
+  },
   created() {},
   mounted() {},
   destroyed() {},

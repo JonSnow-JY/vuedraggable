@@ -1,7 +1,16 @@
 <template lang="html">
   <div class="">
-    <el-form-item :label="item.title" class="form-item">
-      <el-input v-if="item.type === 'inputText'" v-model="form.num"></el-input>
+    <el-form-item
+      :label="item.title"
+      class="form-item"
+      :label-width="`${item.labelWidth}px`"
+    >
+      <el-input
+        v-if="item.type === 'inputText'"
+        v-model="item.defaultValue"
+        :style="{ width: item.width }"
+        :placeholder="item.placeholder"
+      ></el-input>
 
       <el-input
         v-if="item.type === 'textarea'"
@@ -97,7 +106,7 @@ export default {
   watch: {},
   created() {},
   mounted() {
-    console.log(JSON.stringify(this.item, null, 2));
+    // console.log(JSON.stringify(this.item, null, 2));
   },
   destroyed() {},
   methods: {
