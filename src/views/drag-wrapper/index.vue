@@ -157,6 +157,9 @@ export default {
 
 <style lang="scss">
 .form-wrapper {
+  .el-radio__label {
+    font-size: 13px !important;
+  }
   position: relative;
   .empty-text {
     position: absolute;

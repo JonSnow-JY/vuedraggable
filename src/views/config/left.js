@@ -87,18 +87,19 @@ export default {
       showLabel: false,
       // 数据类型
       dataType: "0",
+      radioDefault: "",
       // 选项
       radioOptions: [
         {
-          label: "1",
+          label: "0",
           name: "Option 1"
         },
         {
-          label: "2",
+          label: "1",
           name: "Option 2"
         },
         {
-          label: "3",
+          label: "2",
           name: "Option 3"
         }
       ],

@@ -158,6 +158,7 @@ $width: 300px;
     width: $width;
     height: 100vh;
     user-select: none;
+    flex-shrink: 0;
     .title {
       font-size: 14px;
     }
@@ -198,6 +199,7 @@ $width: 300px;
   .right {
     width: $width;
     height: 100vh;
+    flex-shrink: 0;
     overflow: auto;
     overflow-x: hidden;
   }

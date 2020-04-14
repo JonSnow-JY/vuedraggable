@@ -38,10 +38,15 @@
         :disabled="item.actionAttribute.includes('3')"
       ></el-input-number>
 
-      <el-radio-group v-model="form.num" v-if="item.type === 'radio'">
-        <el-radio :label="3">备选项</el-radio>
-        <el-radio :label="6">备选项</el-radio>
-        <el-radio :label="9">备选项</el-radio>
+      <el-radio-group v-model="item.radioDefault" v-if="item.type === 'radio'">
+        <el-radio
+          :label="item1.label"
+          v-for="(item1, index1) in item.radioOptions"
+          :key="index1"
+          :class="item.customClass"
+          :disabled="item.actionAttribute.includes('3')"
+          >{{ item1.name }}</el-radio
+        >
       </el-radio-group>
 
       <el-checkbox-group v-model="form.num" v-if="item.type === 'checkbox'">
