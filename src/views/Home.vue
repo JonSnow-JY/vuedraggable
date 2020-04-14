@@ -158,7 +158,6 @@ $width: 300px;
     width: $width;
     height: 100vh;
     user-select: none;
-
     .title {
       font-size: 14px;
     }

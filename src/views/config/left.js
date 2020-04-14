@@ -56,13 +56,13 @@ export default {
       icon: "",
       type: "inputNumber",
       title: "计数器",
-      width: "100%",
+      width: "",
       labelWidth: 100,
       customizeLabelWidthDisabled: false,
       // 最小值
       min: 0,
       //最大值
-      max: 10000,
+      max: 9,
       // 步长
       step: 1,
       // num默认值

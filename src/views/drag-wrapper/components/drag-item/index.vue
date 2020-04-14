@@ -4,6 +4,7 @@
       :label="item.title"
       class="form-item"
       :label-width="`${item.labelWidth}px`"
+      :required="item.required"
     >
       <el-input
         v-if="item.type === 'inputText'"
@@ -11,6 +12,8 @@
         :style="{ width: item.width }"
         :class="item.customClass"
         :placeholder="item.placeholder"
+        :disabled="item.actionAttribute.includes('3')"
+        :show-password="item.actionAttribute.includes('4')"
       ></el-input>
 
       <el-input
@@ -21,13 +24,18 @@
         :style="{ width: item.width }"
         :class="item.customClass"
         :placeholder="item.placeholder"
+        :disabled="item.actionAttribute.includes('3')"
       ></el-input>
 
       <el-input-number
-        :min="0"
-        :max="10"
-        v-model="form.num"
+        v-model="item.numberDefaultValue"
         v-if="item.type === 'inputNumber'"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        :min="item.min"
+        :max="item.max"
+        :step="item.step"
+        :disabled="item.actionAttribute.includes('3')"
       ></el-input-number>
 
       <el-radio-group v-model="form.num" v-if="item.type === 'radio'">

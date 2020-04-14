@@ -24,7 +24,10 @@
     >
       <div
         class="item-wrapper"
-        :class="[item.isActive ? 'item-active' : '']"
+        :class="{
+          'item-active': item.isActive,
+          'is-hidden': item.actionAttribute.includes('1')
+        }"
         v-for="(item, index) in itemArr"
         :key="item.id"
         @click="setCenterActive(index)"
@@ -186,6 +189,7 @@ export default {
         right: 0;
         bottom: 0;
         opacity: 0;
+        z-index: 2;
       }
       .icon-lajitong,
       .icon-fuzhi1,
@@ -195,7 +199,7 @@ export default {
         background: #409eff;
         color: #fff;
         padding: 4px;
-        z-index: 1;
+        z-index: 2;
       }
       .icon-tuozhuai {
         top: 0;
@@ -218,6 +222,9 @@ export default {
       }
       &.item-active {
         border: 2px solid #409eff;
+      }
+      &.is-hidden {
+        background: #fef0f0;
       }
     }
     // 选中元素的class

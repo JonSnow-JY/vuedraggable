@@ -269,8 +269,8 @@
             <el-form-item label="默认值">
               <el-input-number
                 v-model="ruleForm.numberDefaultValue"
-                :min="1"
-                :max="10"
+                :min="ruleForm.min"
+                :max="10000"
               ></el-input-number>
             </el-form-item>
             <el-divider></el-divider>
