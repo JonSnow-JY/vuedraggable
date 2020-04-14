@@ -136,7 +136,6 @@
       ></el-cascader>
 
       <el-upload
-        class="upload-demo"
         multiple
         :limit="item.limit"
         :style="{ width: item.width }"
@@ -145,9 +144,22 @@
         v-if="item.type === 'file'"
       >
         <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">
+        <div slot="tip">
           {{ item.promptCaption }}
         </div>
+      </el-upload>
+
+      <el-upload
+        multiple
+        :limit="item.limit"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        action=""
+        v-if="item.type === 'img'"
+        size="mini"
+        list-type="picture-card"
+      >
+        <i class="el-icon-plus"></i>
       </el-upload>
 
       <!-- <div class="" v-if="item.type === 'text'">
