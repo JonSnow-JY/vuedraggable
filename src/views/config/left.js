@@ -259,19 +259,19 @@ export default {
     // }
   ],
   高级字段: [
-    {
-      icon: "",
-      type: "customArea",
-      title: "自定义区域",
-      width: "",
-      customizeLabelWidthDisabled: false,
-      labelWidth: 100,
-      // 绑定数据类型
-      bindingDataType: "0",
-      customClass: "",
-      actionAttribute: ["0"],
-      actionAttributeOptions: ["0", "1"]
-    },
+    // {
+    //   icon: "",
+    //   type: "customArea",
+    //   title: "自定义区域",
+    //   width: "",
+    //   customizeLabelWidthDisabled: false,
+    //   labelWidth: 100,
+    //   // 绑定数据类型
+    //   bindingDataType: "0",
+    //   customClass: "",
+    //   actionAttribute: ["0"],
+    //   actionAttributeOptions: ["0", "1"]
+    // },
     {
       icon: "",
       type: "file",
@@ -308,8 +308,12 @@ export default {
     },
     {
       icon: "",
-      type: "caccader",
+      type: "cascader",
       title: "级联选择器",
+      // 级联选择器默认值
+      cascaderDefaultValue: [],
+      // 级联选择器默认值
+      cascaderOptions: [],
       width: "",
       customizeLabelWidthDisabled: false,
       labelWidth: 100,

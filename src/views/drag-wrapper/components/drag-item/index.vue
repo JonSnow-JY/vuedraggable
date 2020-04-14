@@ -124,6 +124,16 @@
       >
       </el-switch>
 
+      <el-cascader
+        v-model="item.cascaderDefaultValue"
+        :options="item.cascaderOptions"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        :placeholder="item.placeholder"
+        :disabled="item.actionAttribute.includes('3')"
+        :clearable="item.actionAttribute.includes('6')"
+      ></el-cascader>
+
       <!-- <div class="" v-if="item.type === 'text'">
         文字
       </div> -->
