@@ -63,16 +63,22 @@
         >
       </el-checkbox-group>
 
-      <el-time-select
-        v-model="form.num"
+      <el-time-picker
+        v-model="item.timeDefaultValue"
         v-if="item.type === 'timePicker'"
-        :picker-options="{
-          start: '08:30',
-          step: '00:15',
-          end: '18:30'
-        }"
+        :style="{ width: item.width }"
+        :class="item.customClass"
+        :is-range="item.rangeSelect"
+        :placeholder="item.placeholder"
+        :start-placeholder="item.startplaceholder"
+        :end-placeholder="item.endplaceholder"
+        :value-format="item.format"
+        :readonly="item.actionAttribute.includes('2')"
+        :disabled="item.actionAttribute.includes('3')"
+        :editable="item.actionAttribute.includes('5')"
+        :arrow-control="item.actionAttribute.includes('7')"
       >
-      </el-time-select>
+      </el-time-picker>
 
       <el-date-picker
         v-model="form.num"

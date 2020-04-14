@@ -155,6 +155,10 @@ export default {
       // 范围选择
       rangeSelect: false,
       placeholder: "",
+      // 开始时间占位内容
+      startplaceholder: "",
+      // 结束时间占位内容
+      endplaceholder: "",
       // 格式
       format: "HH:mm:ss",
       // 时间默认值

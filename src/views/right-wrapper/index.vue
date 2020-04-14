@@ -195,11 +195,27 @@
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('placeholder')">
+          <template v-if="fieldsShow('placeholder') && !ruleForm.rangeSelect">
             <el-form-item label="占位内容">
               <el-input v-model="ruleForm.placeholder"></el-input>
             </el-form-item>
             <el-divider></el-divider>
+          </template>
+
+          <template v-if="ruleForm.rangeSelect">
+            <template v-if="fieldsShow('startplaceholder')">
+              <el-form-item label="开始时间占位内容">
+                <el-input v-model="ruleForm.startplaceholder"></el-input>
+              </el-form-item>
+              <el-divider></el-divider>
+            </template>
+
+            <template v-if="fieldsShow('endplaceholder')">
+              <el-form-item label="结束时间占位内容">
+                <el-input v-model="ruleForm.endplaceholder"></el-input>
+              </el-form-item>
+              <el-divider></el-divider>
+            </template>
           </template>
 
           <template v-if="fieldsShow('format')">
@@ -209,17 +225,26 @@
             <el-divider></el-divider>
           </template>
 
-          <template v-if="fieldsShow('timeDefaultValue')">
+          <template
+            v-if="fieldsShow('timeDefaultValue') && ruleForm.rangeSelect"
+          >
             <el-form-item label="默认值">
-              <el-time-select
+              <el-time-picker
+                is-range
                 v-model="ruleForm.timeDefaultValue"
-                :picker-options="{
-                  start: '08:30',
-                  step: '00:15',
-                  end: '18:30'
-                }"
+                arrow-control
               >
-              </el-time-select>
+              </el-time-picker>
+            </el-form-item>
+            <el-divider></el-divider>
+          </template>
+
+          <template
+            v-if="fieldsShow('timeDefaultValue') && !ruleForm.rangeSelect"
+          >
+            <el-form-item label="默认值">
+              <el-time-picker v-model="ruleForm.timeDefaultValue" arrow-control>
+              </el-time-picker>
             </el-form-item>
             <el-divider></el-divider>
           </template>
